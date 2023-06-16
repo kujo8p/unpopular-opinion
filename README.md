@@ -34,16 +34,6 @@ Daniel's Links [LinkedIn](https://www.linkedin.com/in/kurt-pendleton-20b936269/)
 
 Fork and clone from the repo above and launch via Live Server to enjoy locally.
 
-
-
-Follow this link to reach the home page, log in, and enjoy!
-
 ---
 
 ### _Credits_
-
-[FC Bayern Munich](https://fcbayern.com/en)
-
-[Giphy](https://giphy.com/fcbayern)
-
-[Google Fonts](https://fonts.google.com/)
