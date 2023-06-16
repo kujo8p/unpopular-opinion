@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>All Unpopular Opinions</h1>
+
+{% for opinion in opinions %}
+<a href="{% url 'detail' opinion.id %}">
+  <div class="card">
+    <div class="card-content">
+      {% if opinion.people %}
+      <span class="card-title">{{ opinion.people }}</span>
+      {% endif%}
+<!-- might want to make this an else, and if it's about a person
+make the movie name smaller -->
+      <span class="card-title">{{ opinion.movie }}</span>
+      <p>Opinion: {{ opinion.tldr }}</p>
+    </div>
+  </div>
+</a>
+{% endfor %} {% endblock %}
