@@ -16,7 +16,7 @@ Daniel's Links [LinkedIn](https://www.linkedin.com/in/kurt-pendleton-20b936269/)
 
 ### _Description_
 
-
+Lets users post their unpopular opinions about sci-fi shows and movies (books to possible come later!), and invites the app's community to read and respond to these opinions.
 
 ---
 
