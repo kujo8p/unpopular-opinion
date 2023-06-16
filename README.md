@@ -30,7 +30,7 @@ Daniel's Links [LinkedIn](https://www.linkedin.com/in/kurt-pendleton-20b936269/)
 
 ### _Getting Started_
 
-[Github]()
+[Github](https://github.com/kujo8p/unpopular-opinion)
 
 Fork and clone from the repo above and launch via Live Server to enjoy locally.
 
