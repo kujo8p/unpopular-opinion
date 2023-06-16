@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
-# Create your models here.
+
 RATINGS = (
     ("NC-17", "Adults only"),
     ("R", "Restricted"),
@@ -14,18 +15,23 @@ RATINGS = (
 class Opinion(models.Model):
     author = models.CharField(max_length=100)
     title = models.CharField(max_length=150)
+    date = models.DateField("posted on")
     content = models.CharField(max_length=500)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
     author = models.CharField(max_length=100)
     title = models.CharField(max_length=150)
+    date = models.DateField("posted on")
     content = models.CharField(max_length=500)
 
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
-    release_year = models.IntegerField(max_length=4)
+    release_year = models.IntegerField()
     rating = models.CharField(max_length=1, choices=RATINGS, default=RATINGS[0][0])
 
 
