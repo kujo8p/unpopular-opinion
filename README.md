@@ -10,7 +10,7 @@
 
 Kurt's Links [LinkedIn](https://www.linkedin.com/in/kurt-pendleton-20b936269/) | [GitHub](https://github.com/kujo8p) |
 Luke's Links [LinkedIn](https://www.linkedin.com/in/luke-hufton/) | [GitHub](https://github.com/ProPip23) |
-Daniel's Links [LinkedIn](https://www.linkedin.com/in/kurt-pendleton-20b936269/) | [GitHub](https://github.com/kujo8p) |
+Daniel's Links [LinkedIn](https://www.linkedin.com/in/daniel-z-loewenstein/) | [GitHub](https://github.com/loewenst) | 
 
 ---
 
