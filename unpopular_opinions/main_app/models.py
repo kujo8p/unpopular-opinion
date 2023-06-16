@@ -3,30 +3,32 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 RATINGS = (
-    ("Adults only", "NC-17"),
-    ("Restricted", "R"),
-    ("Parents Strongly Cautioned", "PG-13"),
-    ("Parental Guidance", "PG"),
-    ("Parental Guidance", "PG"),
+    ("NC-17", "Adults only"),
+    ("R", "Restricted"),
+    ("PG-13", "Parents Strongly Cautioned"),
+    ("PG", "Parental Guidance"),
+    ("G", "General Audiences"),
 )
+
+
+class Opinion(models.Model):
+    author = models.CharField(max_length=100)
+    title = models.CharField(max_length=150)
+    content = models.CharField(max_length=500)
+
+
+class Comment(models.Model):
+    author = models.CharField(max_length=100)
+    title = models.CharField(max_length=150)
+    content = models.CharField(max_length=500)
 
 
 class Movie(models.Model):
     title = models.CharField(max_length=100)
-    rating = models.CharField(max_length=5)
-
-
-class Opinion(models.Model):
-  title = models.CharField(max_length=150)
-  content = models.CharField(max_length=500)
-  release_year = 
-
-
-class Comment(models.Model):
-    pass
+    release_year = models.IntegerField(max_length=4)
+    rating = models.CharField(max_length=1, choices=RATINGS, default=RATINGS[0][0])
 
 
 class Personnel(models.Model):
-  role = models.CharField(max_length=50)
-  name = models.CharField(max_length=100)
-    pass
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=50)
