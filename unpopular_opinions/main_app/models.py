@@ -11,19 +11,18 @@ RATINGS = (
 )
 
 
-class Movie(models.model):
-    RATINGS
+class Movie(models.Model):
     title = models.CharField(max_length=100)
-    rating = models.CharField()
+    rating = models.CharField(max_length=200)
 
 
-class Opinion(models.model):
+class Opinion(models.Model):
     pass
 
 
-class Comment(models.model):
+class Comment(models.Model):
     pass
 
 
-class Opinion(models.model):
+class Opinion(models.Model):
     pass
