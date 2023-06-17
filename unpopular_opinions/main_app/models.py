@@ -12,23 +12,6 @@ RATINGS = (
 )
 
 
-class Opinion(models.Model):
-    author = models.CharField(max_length=100)
-    title = models.CharField(max_length=150)
-    date = models.DateField("posted on")
-    content = models.CharField(max_length=500)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
-class Comment(models.Model):
-    author = models.CharField(max_length=100)
-    title = models.CharField(max_length=150)
-    date = models.DateField("posted on")
-    content = models.CharField(max_length=500)
-
-
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     release_year = models.IntegerField()
@@ -38,3 +21,22 @@ class Movie(models.Model):
 class Personnel(models.Model):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=50)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+
+class Comment(models.Model):
+    author = models.CharField(max_length=100)
+    title = models.CharField(max_length=150)
+    date = models.DateField("posted on")
+    content = models.CharField(max_length=500)
+
+
+class Opinion(models.Model):
+    author = models.CharField(max_length=100)
+    title = models.CharField(max_length=150)
+    date = models.DateField("posted on")
+    content = models.CharField(max_length=500)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
