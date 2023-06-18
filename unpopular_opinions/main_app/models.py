@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from datetime import date
 
 
+
 RATINGS = (
     ("NC-17", "Adults only"),
     ("R", "Restricted"),
