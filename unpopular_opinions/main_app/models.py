@@ -18,6 +18,9 @@ class Movie(models.Model):
     release_year = models.IntegerField()
     rating = models.CharField(choices=RATINGS, default=RATINGS[0][0])
 
+    def __str__(self):
+      return self.title
+
 
 class Personnel(models.Model):
     name = models.CharField(max_length=100)
@@ -38,5 +41,6 @@ class Opinion(models.Model):
     date = models.DateField("posted on")
     content = models.CharField(max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
-    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
+
+    def __str__(self):
+      return self.tldr
