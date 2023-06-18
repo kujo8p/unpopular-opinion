@@ -2,9 +2,10 @@
 
 <h1>All Unpopular Opinions</h1>
 
+<div class="container">
 {% for opinion in opinions %}
   <div class="card">
-    <div class="card-content">
+    <div class="card-content grey-text text-lighten-5">
       {% if opinion.personnel %}
       <span class="card-title">{{ opinion.personnel }}</span>
       {% endif%}
@@ -15,4 +16,5 @@ make the movie name smaller -->
     </div>
   </div>
 </a>
+</div>
 {% endfor %} {% endblock %}
