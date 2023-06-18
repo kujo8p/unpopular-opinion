@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Opinion: {{ opinion.tldr }} </h1>
+{% if opinion.personnel %}
+<h3>{{ opinion.personnel }}</h3>
+{% endif %}
+<h3>{{ opinion.movie}}</h3>
+
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <p>{{ opinion.content }}</p>
+        <p>Date: {{ opinion.date }}</p>
+        <!-- Possibility: {% if opinion.recent_edit %} -->
+        <!-- <p>Edited: {{ opinion.recent_edit }}</p> -->
+        <!-- {% endif %} -->
+
+      </div>
+      <div class="card-action">
+        <a href="{% url 'opinions_update' opinion.id %}">Edit</a>
+        <a href="{% url 'opinions_delete' opinion.id %}">Delete</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s6">
+    <form action="{% url 'add_comment' opinion.id %}" method="POST">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <input type="submit" class="btn" value="Add Comment" />
+    </form>
+  </div>
+</div>
+
+<!-- IS THERE A WAY TO ADAPT THIS TO SAY NO COMMENTS YET:
+{% if finch.seen_today %}
+<div class="card-panel teal-text center-align">
+  Nice! You saw a {{finch.name}} today.
+</div>
+{% else %}
+<div class="card-panel red-text center-align">
+  No sightings yet today. Get out there and see if you can spot a {{finch.name}}!
+</div>
+{% endif %} -->
+
+<h3>Comments</h3>
+<div class="col s6">
+  <table class="striped">
+    <thead>
+      <tr>
+        <th>Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for comment in opinion.comment_set.all %}
+      <tr>
+        <td>{{comment.content}} </br> - {{comment.author}} </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
