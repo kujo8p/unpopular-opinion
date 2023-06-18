@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from datetime import date
-
 
 
 RATINGS = (
@@ -16,7 +16,7 @@ RATINGS = (
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     release_year = models.IntegerField()
-    rating = models.CharField(max_length=1, choices=RATINGS, default=RATINGS[0][0])
+    rating = models.CharField(choices=RATINGS, default=RATINGS[0][0])
 
 
 class Personnel(models.Model):
@@ -26,7 +26,7 @@ class Personnel(models.Model):
 
 
 class Comment(models.Model):
-    author = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
     date = models.DateField("posted on")
     content = models.CharField(max_length=500)
