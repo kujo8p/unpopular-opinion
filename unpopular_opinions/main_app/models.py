@@ -16,7 +16,7 @@ RATINGS = (
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     release_year = models.IntegerField()
-    rating = models.CharField(max_length=1, choices=RATINGS, default=RATINGS[0][0])
+    rating = models.CharField(choices=RATINGS, default=RATINGS[0][0])
 
 
 class Personnel(models.Model):
