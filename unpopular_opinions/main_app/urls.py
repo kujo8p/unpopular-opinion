@@ -12,4 +12,5 @@ urlpatterns = [
     # path("comment/", views.comment, name="comment"),
     # path("comment/create", views.CommentCreate.as_view(), name="comment"),
     # path("comment/delete", views.CommentDelete.as_view(), name="delete"),
+    path('accounts/signup/', views.signup, name='signup'),
 ]

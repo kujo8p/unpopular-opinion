@@ -2,10 +2,10 @@
 {% block content %}
 <div class="container grey-text text-lighten-5">
   <h1>Log In</h1>
-  <form method="POST" action="{% url 'login' %}">
+  <form class="grey-text text-lighten-5" method="POST" action="{% url 'login' %}">
   {% csrf_token %}
   {{ form.as_p }}
-  <input type="hidden" name="next" value="{{ next }}">
+  <input class="grey-text text-lighten-5" type="hidden" name="next" value="{{ next }}">
   <button type="submit" class="btn large grey darken-3">Log In</button>
   </form>
 </div>

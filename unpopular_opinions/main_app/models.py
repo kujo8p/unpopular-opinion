@@ -45,7 +45,6 @@ class Comment(models.Model):
     title = models.CharField(max_length=150)
     date = models.DateField("posted on")
     content = models.CharField(max_length=500)
-    opinion = models.ForeignKey(Opinion, on_delete=models.CASCADE)
 
     def __str__(self):
       return self.title
