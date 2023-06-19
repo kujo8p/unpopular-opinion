@@ -20,11 +20,13 @@
 </div>
 
 {% for opinion in opinions %}
+<a href="{% url 'opinion_detail' opinion.id %}"></a>
+
 <br>
-<div class="container">
-  
+<div class="container"> 
   <div class="card grey darken-3">
     <div class="card-content grey-text text-lighten-5">
+
       {% if opinion.personnel %}
       <span class="card-title">{{ opinion.personnel }}</span>
       {% endif%}
