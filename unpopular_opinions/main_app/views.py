@@ -28,7 +28,7 @@ def opinions_index(request):
     return render(request, "opinions/index.html", {"opinions": opinions})
 
 
-def opinions_detail(request, opinion_id):
+def opinion_detail(request, opinion_id):
     opinion = Opinion.objects.get(id=opinion_id)
     return render(request, 'opinions/detail.html', {
     'opinion': opinion,
