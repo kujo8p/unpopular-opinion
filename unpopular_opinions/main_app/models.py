@@ -44,3 +44,6 @@ class Opinion(models.Model):
 
     def __str__(self):
       return self.tldr
+
+    def get_absolute_url(self):
+      return reverse('detail', kwargs={'opinion_id': self.id})
