@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>All Unpopular Opinions</h1>
+<h1 class="center">All Unpopular Opinions</h1>
 
-<div class="container">
 {% for opinion in opinions %}
-  <div class="card">
+<div class="container">
+  <div class="card grey darken-3">
     <div class="card-content grey-text text-lighten-5">
       {% if opinion.personnel %}
       <span class="card-title">{{ opinion.personnel }}</span>
@@ -15,6 +15,5 @@ make the movie name smaller -->
       <p>Opinion: {{ opinion.tldr }}</p>
     </div>
   </div>
-</a>
 </div>
 {% endfor %} {% endblock %}
