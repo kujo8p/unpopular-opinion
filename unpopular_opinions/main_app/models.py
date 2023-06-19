@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from datetime import date
+from datetime import datetime
 
 
 RATINGS = (
@@ -38,7 +38,7 @@ class Comment(models.Model):
 class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tldr = models.CharField(max_length=150)
-    date = models.DateField("posted on")
+    date = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 

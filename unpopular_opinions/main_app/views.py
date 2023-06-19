@@ -1,6 +1,5 @@
 import os
 import uuid
-import boto3
 from django.shortcuts import render, redirect
 from .models import Opinion
 from django.contrib.auth import login

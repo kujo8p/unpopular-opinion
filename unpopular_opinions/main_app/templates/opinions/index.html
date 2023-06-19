@@ -3,6 +3,7 @@
 <h1>All Unpopular Opinions</h1>
 
 {% for opinion in opinions %}
+<a href="{% url 'opinion_detail' opinion.id %}"></a>
   <div class="card">
     <div class="card-content">
       {% if opinion.personnel %}
