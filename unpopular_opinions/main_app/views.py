@@ -2,7 +2,7 @@ import os
 import uuid
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Opinion
+from .models import Opinion, Comment
 from django.contrib.auth import login
 
 
@@ -30,8 +30,9 @@ def opinions_index(request):
 
 def opinion_detail(request, opinion_id):
     opinion = Opinion.objects.get(id=opinion_id)
+    comment = Comment.objects.all()
     return render(request, 'opinions/detail.html', {
-    'opinion': opinion,
+    'opinion': opinion, 'comment': comment
     })
 
 # class OpinionUpdate(LoginRequiredMixin, UpdateView):

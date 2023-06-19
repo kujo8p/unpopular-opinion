@@ -27,14 +27,6 @@ class Personnel(models.Model):
     role = models.CharField(max_length=50)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
-
-class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    date = models.DateField("posted on")
-    content = models.CharField(max_length=500)
-
-
 class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tldr = models.CharField(max_length=150)
@@ -47,3 +39,13 @@ class Opinion(models.Model):
 
     def get_absolute_url(self):
       return reverse('detail', kwargs={'opinion_id': self.id})
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    date = models.DateField("posted on")
+    content = models.CharField(max_length=500)
+    opinion = models.ForeignKey(Opinion, on_delete=models.CASCADE)
+
+    def __str__(self):
+      return self.title
