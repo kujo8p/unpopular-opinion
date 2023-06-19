@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1> {{ personnel.name }} </h1>
+{% for movie in personnel.movie_set.all %}
+  <h3>{{personnel.role}} in {{movie.title}} </h3>
+{% endfor %}
+
+{% for opinion in personnel.opinion_set.all %}
+<a href="{% url 'opinion_detail' opinion.id %}"></a>
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ opinion.movie }}</span>
+      <p>Opinion: {{ opinion.tldr }}</p>
+    </div>
+  </div>
+</a>
+{% endfor %}
+
+{% endblock %}
