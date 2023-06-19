@@ -1,10 +1,11 @@
 import os
 import uuid
-import boto3
 from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Opinion
 from django.contrib.auth import login
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
 
 # name possibly subject to change
 from django.contrib.auth.forms import UserCreationForm
@@ -28,6 +29,7 @@ def opinion_index(request):
     return render(request, "opinion/index.html", {"opinion": opinions})
 
 
+<<<<<<< HEAD
 def opinion_detail(request):
     opinion = Opinion.objects.get(id=opinion_id)
     return render(request, "opinion/detail.html", {"opinion": opinion})
@@ -64,3 +66,18 @@ class CommentUpdate(UpdateView):
 class CommentDelete(DeleteView):
     model = Opinion
     fields = "__all__"
+=======
+def opinions_detail(request, opinion_id):
+    opinion = Opinion.objects.get(id=opinion_id)
+    return render(request, 'opinions/detail.html', {
+    'opinion': opinion,
+    })
+
+# class OpinionUpdate(LoginRequiredMixin, UpdateView):
+#   model = Opinion
+#   fields = ['content']
+
+# class OpinionDelete(LoginRequiredMixin, DeleteView):
+#   model = Opinion
+#   success_url = '/opinion'
+>>>>>>> 1726bee6a21c98f82b440832833e36485ddc9ba9
