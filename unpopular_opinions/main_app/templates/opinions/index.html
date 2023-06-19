@@ -1,19 +1,53 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1 class="center">All Unpopular Opinions</h1>
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br>
+      <br>
+      <h1 class="header center grey-text text-lighten-5">All Unpopular Opinioins</h1>
+      <div class="row center">
+        <h5 class="header col s12 light grey-text text-lighten-5">A website for you to share your unpopular or underrepresented opinions!</h5>
+      </div>
+      <div class="row center">
+        <a href="{% url 'about' %}" class="waves-effect waves-light btn-large grey darken-4">Make a post!</a>
+      </div>
+    </div>
+    <div class="parallax">
+      <img src="https://i.imgur.com/3RImg3K.jpg" alt="futuristic pathway" style="transform: translate3d(-50%, 250.215px, 50px); opacity: 1;">
+    </div>
+  </div>
+</div>
 
 {% for opinion in opinions %}
+<br>
 <div class="container">
+  
   <div class="card grey darken-3">
     <div class="card-content grey-text text-lighten-5">
       {% if opinion.personnel %}
       <span class="card-title">{{ opinion.personnel }}</span>
       {% endif%}
-<!-- might want to make this an else, and if it's about a person
-make the movie name smaller -->
-      <span class="card-title">{{ opinion.movie }}</span>
-      <p>Opinion: {{ opinion.tldr }}</p>
+      <!-- might want to make this an else, and if it's about a person
+        make the movie name smaller -->
+        <span class="card-title">{{ opinion.movie }}</span>
+        <p>Opinion: {{ opinion.tldr }}</p>
+        <hr>
+        <p>{{ opinion.content }}</p>
+        <br>
+        <div class="card-action">
+          <a href="{% url 'detail' opinion.id %}">Details
+        </a>
+      </div>
     </div>
   </div>
+  
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.parallax');
+    var instances = M.Parallax.init(elems);
+    console.log(elems)
+  });
+  </script>
 {% endfor %} {% endblock %}
