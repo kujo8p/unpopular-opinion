@@ -4,6 +4,7 @@ import boto3
 from django.shortcuts import render, redirect
 from .models import Opinion
 from django.contrib.auth import login
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 # name possibly subject to change
 from django.contrib.auth.forms import UserCreationForm
@@ -21,11 +22,45 @@ def about(request):
     return render(request, "about.html")
 
 
-# Function names may change when I know what has been happening on the  Front-end.
-def opinions_index(request):
-    opinions = Opinion.objects.filter(user=request.user)
-    return render(request, "opinions/index.html", {"opinions": opinions})
+@login_required
+def opinion_index(request):
+    opinion = Opinion.objects.filter(user=request.user)
+    return render(request, "opinion/index.html", {"opinion": opinions})
 
 
-def opinions_detail(request):
+def opinion_detail(request):
     opinion = Opinion.objects.get(id=opinion_id)
+    return render(request, "opinion/detail.html", {"opinion": opinion})
+
+
+class OpinionCreate(CreateView):
+    model = Opinion
+    fields = "__all__"
+
+
+class OpinionUpdate(UpdateView):
+    model = Opinion
+    fields = ["tldr", "content"]
+
+
+class OpinionDelete(DeleteView):
+    model = Opinion
+    fields = "__all__"
+
+
+class CommentCreate(CreateView):
+    model = Opinion
+    fields = "__all__"
+
+    def comment(request):
+        pass
+
+
+class CommentUpdate(UpdateView):
+    model = Opinion
+    fields = ["title", "content"]
+
+
+class CommentDelete(DeleteView):
+    model = Opinion
+    fields = "__all__"

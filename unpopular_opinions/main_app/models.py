@@ -19,7 +19,7 @@ class Movie(models.Model):
     rating = models.CharField(choices=RATINGS, default=RATINGS[0][0])
 
     def __str__(self):
-      return self.title
+        return self.title
 
 
 class Personnel(models.Model):
@@ -28,19 +28,21 @@ class Personnel(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
 
-class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    date = models.DateField("posted on")
-    content = models.CharField(max_length=500)
-
-
 class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tldr = models.CharField(max_length=150)
     date = models.DateField("posted on")
     content = models.CharField(max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
 
     def __str__(self):
-      return self.tldr
+        return self.tldr
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    date = models.DateField("posted on")
+    content = models.CharField(max_length=500)
+    opinion = models.ForeignKey(Opinion, on_delete=models.CASCADE)
