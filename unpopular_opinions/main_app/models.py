@@ -41,26 +41,16 @@ class Opinion(models.Model):
     def __str__(self):
         return self.tldr
 
-
-class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    date = models.DateField("posted on")
-    content = models.CharField(max_length=500)
-    opinion = models.ForeignKey(Opinion, on_delete=models.CASCADE, default=1)
-
-    def __str__(self):
-        return self.tldr
-
     def get_absolute_url(self):
         return reverse("detail", kwargs={"opinion_id": self.id})
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
-    date = models.DateField("posted on")
-    content = models.CharField(max_length=500)
+    date = models.DateField(auto_now_add=True)
+    content = models.CharField("comment", max_length=500)
+    opinion = models.ForeignKey(Opinion, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
