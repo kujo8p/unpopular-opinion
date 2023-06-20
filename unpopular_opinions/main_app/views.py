@@ -37,6 +37,18 @@ def opinion_detail(request, opinion_id):
     'opinion': opinion, 'comments': comments, 'comment_form': comment_form
     })
 
+class OpinionCreate(CreateView):
+    model = Opinion
+    fields = ['tldr', 'content', 'movie']
+
+class OpinionUpdate(LoginRequiredMixin, UpdateView):
+    model = Opinion
+    fields = ['tldr', 'content']
+
+class OpinionDelete(LoginRequiredMixin, DeleteView):
+    model = Opinion
+    success_url = '/opinion'
+
 def movie_index(request):
     movies = Movie.objects.all()
     return render(request, "movies/index.html", {"movies": movies})
@@ -51,14 +63,14 @@ class MovieCreate(CreateView):
     model = Movie
     fields = ["title", "release_year"]
 
-def add_comment(request, opinion_id, user_id):
+def add_comment(request, opinion_id):
     form = CommentForm(request.POST)
     if form.is_valid():
         new_comment = form.save(commit=False)
         new_comment.opinion_id = opinion_id
-        new_comment.user_id = user_id
+        new_comment.user_id = request.user.id
         new_comment.save()
-    return redirect('opinion_detail', opinion_id=opinion_id, user_id=user_id)
+    return redirect('opinion_detail', opinion_id=opinion_id)
 
 def signup(request):
     error_message = ''
