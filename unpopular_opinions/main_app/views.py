@@ -26,31 +26,37 @@ def about(request):
 @login_required
 def opinion_index(request):
     opinion = Opinion.objects.filter(user=request.user)
-    return render(request, "opinion/index.html", {"opinion": opinions})
+    return render(request, "opinions/index.html", {"opinion": opinion})
 
 
-<<<<<<< HEAD
+@login_required
 def opinion_detail(request):
     opinion = Opinion.objects.get(id=opinion_id)
-    return render(request, "opinion/detail.html", {"opinion": opinion})
+    return render(request, "opinions/detail.html", {"opinion": opinion})
 
 
-class OpinionCreate(CreateView):
+def movie_index(request):
+    movies = Movie.object(movie)
+
+
+# Server was running before the addition of loginrequr
+class OpinionCreate(CreateView, LoginRequiredMixin):
     model = Opinion
     fields = "__all__"
 
 
-class OpinionUpdate(UpdateView):
+class OpinionUpdate(UpdateView, LoginRequiredMixin):
     model = Opinion
     fields = ["tldr", "content"]
 
 
-class OpinionDelete(DeleteView):
+# Might not need this on delete since you have to be logged in to view the opinion.
+class OpinionDelete(DeleteView, LoginRequiredMixin):
     model = Opinion
     fields = "__all__"
 
 
-class CommentCreate(CreateView):
+class CommentCreate(CreateView, LoginRequiredMixin):
     model = Opinion
     fields = "__all__"
 
@@ -58,26 +64,11 @@ class CommentCreate(CreateView):
         pass
 
 
-class CommentUpdate(UpdateView):
+class CommentUpdate(UpdateView, LoginRequiredMixin):
     model = Opinion
     fields = ["title", "content"]
 
 
-class CommentDelete(DeleteView):
+class CommentDelete(DeleteView, LoginRequiredMixin):
     model = Opinion
     fields = "__all__"
-=======
-def opinions_detail(request, opinion_id):
-    opinion = Opinion.objects.get(id=opinion_id)
-    return render(request, 'opinions/detail.html', {
-    'opinion': opinion,
-    })
-
-# class OpinionUpdate(LoginRequiredMixin, UpdateView):
-#   model = Opinion
-#   fields = ['content']
-
-# class OpinionDelete(LoginRequiredMixin, DeleteView):
-#   model = Opinion
-#   success_url = '/opinion'
->>>>>>> 1726bee6a21c98f82b440832833e36485ddc9ba9

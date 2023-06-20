@@ -34,10 +34,8 @@ class Opinion(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     content = models.CharField(max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE)
 
     def __str__(self):
-<<<<<<< HEAD
         return self.tldr
 
 
@@ -46,10 +44,10 @@ class Comment(models.Model):
     title = models.CharField(max_length=150)
     date = models.DateField("posted on")
     content = models.CharField(max_length=500)
-    opinion = models.ForeignKey(Opinion, on_delete=models.CASCADE)
-=======
-      return self.tldr
+    opinion = models.ForeignKey(Opinion, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.tldr
 
     def get_absolute_url(self):
-      return reverse('detail', kwargs={'opinion_id': self.id})
->>>>>>> 1726bee6a21c98f82b440832833e36485ddc9ba9
+        return reverse("detail", kwargs={"opinion_id": self.id})
