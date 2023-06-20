@@ -37,6 +37,18 @@ def opinion_detail(request, opinion_id):
     'opinion': opinion, 'comments': comments, 'comment_form': comment_form
     })
 
+class OpinionCreate(CreateView):
+    model = Opinion
+    fields = ['tldr', 'content']
+
+class OpinionUpdate(LoginRequiredMixin, UpdateView):
+    model = Opinion
+    fields = ['tldr', 'content']
+
+class OpinionDelete(LoginRequiredMixin, DeleteView):
+    model = Opinion
+    success_url = '/opinion'
+
 def movie_index(request):
     movies = Movie.objects.all()
     return render(request, "movies/index.html", {"movies": movies})
