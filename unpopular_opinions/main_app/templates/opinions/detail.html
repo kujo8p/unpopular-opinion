@@ -62,10 +62,10 @@
           <th><h3>Comments</h3></th>
         </tr>
       </thead>
-      <tbody>
-        {% for comment in opinion.comment_set.all %}
-        <tr>
-          <td>{{comment.content}} </br> - {{comment.author}} </td>
+      <tbody class="grey darken-3">
+        {% for comment in comments %}
+        <tr class="grey darken-3">
+          <td>{{comment.content}} </br> - {{comment.user}} </td>
         </tr>
         {% endfor %}
       </tbody>

@@ -4,7 +4,7 @@
 
 {% for opinion in movie.opinion_set.all %}
 <div class="container">
-<a href="{% url 'opinion_detail' opinion.id %}"></a>
+<a href="{% url 'opinion_detail' opinion.id %}">
   <div class="card grey darken-3">
     <div class="card-content grey darken-3">
       <span class="card-title grey darken-3">{{ opinion.movie }}</span>
