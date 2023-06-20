@@ -2,7 +2,8 @@ import os
 import uuid
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Opinion, Movie, Comment
+from .models import Opinion, Movie, Comment, User
+from .forms import CommentForm
 from django.contrib.auth import login
 
 
@@ -31,8 +32,9 @@ def opinions_index(request):
 def opinion_detail(request, opinion_id):
     opinion = Opinion.objects.get(id=opinion_id)
     comments = Comment.objects.all()
+    comment_form = CommentForm()
     return render(request, 'opinions/detail.html', {
-    'opinion': opinion, 'comments': comments
+    'opinion': opinion, 'comments': comments, 'comment_form': comment_form
     })
 
 def movie_index(request):
@@ -49,13 +51,14 @@ class MovieCreate(CreateView):
     model = Movie
     fields = ["title", "release_year"]
 
-def add_comment(request, opinion_id):
+def add_comment(request, opinion_id, user_id):
     form = CommentForm(request.POST)
     if form.is_valid():
         new_comment = form.save(commit=False)
         new_comment.opinion_id = opinion_id
+        new_comment.user_id = user_id
         new_comment.save()
-    return redirect('opinion_detail', opinion_id=opinion_id)
+    return redirect('opinion_detail', opinion_id=opinion_id, user_id=user_id)
 
 def signup(request):
     error_message = ''
