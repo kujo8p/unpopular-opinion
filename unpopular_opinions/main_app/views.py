@@ -2,7 +2,7 @@ import os
 import uuid
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Opinion, Comment, Movie
+from .models import Opinion, Movie, Comment
 from django.contrib.auth import login
 
 
