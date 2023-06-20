@@ -30,9 +30,9 @@ def opinions_index(request):
 
 def opinion_detail(request, opinion_id):
     opinion = Opinion.objects.get(id=opinion_id)
-    comment = Comment.objects.all()
+    comments = Comment.objects.all()
     return render(request, 'opinions/detail.html', {
-    'opinion': opinion, 'comment': comment
+    'opinion': opinion, 'comments': comments
     })
 
 def movie_index(request):
