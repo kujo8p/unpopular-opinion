@@ -39,7 +39,7 @@ def opinion_detail(request, opinion_id):
 
 class OpinionCreate(CreateView):
     model = Opinion
-    fields = ['tldr', 'content']
+    fields = ['tldr', 'content', 'movie']
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion
