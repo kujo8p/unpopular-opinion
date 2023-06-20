@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
+<div class="container">
 <h1>All Movies</h1>
 
 {% for movie in movies %}
@@ -11,5 +12,6 @@
       <p>{{ movies.opinion_set.count }} Opinions</p>
     </div>
   </div>
+</div>
 </a>
 {% endfor %} {% endblock %}

@@ -35,15 +35,10 @@ def opinion_detail(request, opinion_id):
     'opinion': opinion, 'comment': comment
     })
 
+def movie_index(request):
+    movie = Movie.objects.all()
+    return render(request, "movies/index.html", {"movie": movie})
 
-
-# class OpinionUpdate(LoginRequiredMixin, UpdateView):
-#   model = Opinion
-#   fields = ['content']
-
-# class OpinionDelete(LoginRequiredMixin, DeleteView):
-#   model = Opinion
-#   success_url = '/opinion'
 
 def signup(request):
     error_message = ''
