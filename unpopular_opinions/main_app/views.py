@@ -36,7 +36,7 @@ def opinion_detail(request):
 
 
 def movie_index(request):
-    movies = Movie.object(movie)
+    movies = Movie.object.all()
 
 
 # Server was running before the addition of loginrequr
