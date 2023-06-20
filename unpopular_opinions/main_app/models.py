@@ -22,7 +22,7 @@ class Movie(models.Model):
       return self.title
 
     def get_absolute_url(self):
-      return reverse('detail', kwargs={'movie_id': self.id})
+      return reverse('movie_detail', kwargs={'movie_id': self.id})
 
 
 class Personnel(models.Model):
