@@ -2,7 +2,7 @@ import os
 import uuid
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Opinion
+from .models import Opinion, Comment, Movie
 from django.contrib.auth import login
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -29,46 +29,44 @@ def opinion_index(request):
     return render(request, "opinions/index.html", {"opinion": opinion})
 
 
-@login_required
-def opinion_detail(request):
+def opinion_detail(request, opinion_id):
     opinion = Opinion.objects.get(id=opinion_id)
-    return render(request, "opinions/detail.html", {"opinion": opinion})
+    comments = Comment.objects.all()
+    return render(
+        request, "opinions/detail.html", {"opinion": opinion, "comments": comments}
+    )
 
 
 def movie_index(request):
-    movies = Movie.object.all()
+    movies = Movie.objects.all()
+    return render(request, "movies/index.html", {"movies": movies})
 
 
-# Server was running before the addition of loginrequr
-class OpinionCreate(CreateView, LoginRequiredMixin):
-    model = Opinion
-    fields = "__all__"
+def movie_detail(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    return render(request, "movies/detail.html", {"movie": movie})
 
 
-class OpinionUpdate(UpdateView, LoginRequiredMixin):
-    model = Opinion
-    fields = ["tldr", "content"]
+class MovieCreate(CreateView):
+    model = Movie
+    fields = ["title", "release_year"]
 
 
-# Might not need this on delete since you have to be logged in to view the opinion.
-class OpinionDelete(DeleteView, LoginRequiredMixin):
-    model = Opinion
-    fields = "__all__"
-
-
-class CommentCreate(CreateView, LoginRequiredMixin):
-    model = Opinion
-    fields = "__all__"
-
-    def comment(request):
-        pass
-
-
-class CommentUpdate(UpdateView, LoginRequiredMixin):
-    model = Opinion
-    fields = ["title", "content"]
-
-
-class CommentDelete(DeleteView, LoginRequiredMixin):
-    model = Opinion
-    fields = "__all__"
+def signup(request):
+    error_message = ""
+    if request.method == "POST":
+        # This is how to create a 'user' form object
+        # that includes the data from the browser
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            # This will add the user to the database
+            user = form.save()
+        # This is how we log a user in via code
+        login(request, user)
+        return redirect("index")
+    else:
+        error_message = "Invalid sign up - try again"
+    # A bad POST or a GET request, so render signup.html with an empty form
+    form = UserCreationForm()
+    context = {"form": form, "error_message": error_message}
+    return render(request, "registration/signup.html", context)

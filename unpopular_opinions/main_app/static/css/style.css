@@ -1,3 +1,7 @@
+* {
+  color: #fafafa;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -21,3 +25,10 @@ img {
   width: 800px;
 }
 
+#id_username {
+  color: #fafafa;
+}
+
+tbody {
+  background-color: #424242;
+}
