@@ -39,7 +39,7 @@ def opinion_detail(request, opinion_id):
 
 class OpinionCreate(CreateView):
     model = Opinion
-    fields = ['tldr', 'content', 'movie']
+    fields = ['tldr', 'content', 'movie_choice']
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion
@@ -62,6 +62,15 @@ def movie_detail(request, movie_id):
 class MovieCreate(CreateView):
     model = Movie
     fields = ["title", "release_year"]
+
+def add_opinion(request):
+    form = OpinionForm(request.POST)
+    if form.is_valid():
+        new_opinion = form.save(commit=False)
+        new_opinion.movie_id = movie_id
+        new_opinion.user_id = request.user.id
+        new_opinion.save()
+    return redirect('opinion_index', opinion_id=opinion_id)
 
 def add_comment(request, opinion_id):
     form = CommentForm(request.POST)
