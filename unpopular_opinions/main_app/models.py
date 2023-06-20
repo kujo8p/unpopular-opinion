@@ -30,12 +30,20 @@ class Personnel(models.Model):
     role = models.CharField(max_length=50)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
+movies = Movie.objects.all()
+
+Movie_Choices = [("Select Movie","Select Movie")]
+for movie in movies:
+    Movie_Choices.append((movie.id, movie.title))
+
+
 class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tldr = models.CharField('opinion', max_length=150)
     date = models.DateTimeField(auto_now_add=True)
     content = models.CharField('explanation', max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movie_choice = models.CharField(choices=Movie_Choices, default=Movie_Choices[0])
 
     def __str__(self):
       return self.tldr
