@@ -8,11 +8,10 @@
     <h1>Add Opinion</h1>
   {% endif %}
 
-  <form action="" method="POST">
+  <form action="" method="POST" class="grey darken-4">
 
     {% csrf_token %}
-    <table>
-
+    <table class="grey darken-4">
       {{ form.as_table }}
     </table>
     <br>
@@ -20,6 +19,6 @@
   </form>
 </div>
 <script>
-  
+
 </script>
 {% endblock %}
