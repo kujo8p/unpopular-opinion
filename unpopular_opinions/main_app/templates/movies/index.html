@@ -18,19 +18,20 @@
   </div>
 </div>
 
+{% for movie in movies %}
 <div class="container">
 
-{% for movie in movies %}
-<a href="{% url 'movie_detail' movie.id %}"></a>
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">{{ movie.title }}</span>
-      <p>Release Year: {{ movie.release_year }}</p>
-      <p>{{ movies.opinion_set.count }} Opinions</p>
+  <a href="{% url 'movie_detail' movie.id %}">
+    <div class="card grey darken-3">
+      <div class="card-content grey darken-3">
+        <span class="card-title grey darken-3">{{ movie.title }}</span>
+        <p>Release Year: {{ movie.release_year }}</p>
+        <p>{{ movies.opinion_set.count }} Opinions</p>
+      </div>
     </div>
-  </div>
+  </a>
 </div>
-</a>
+{% endfor %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.parallax');
@@ -38,4 +39,4 @@
     console.log(elems)
   });
   </script>
-{% endfor %} {% endblock %}
+{% endblock %}
