@@ -21,19 +21,14 @@ class Movie(models.Model):
     def __str__(self):
       return self.title
 
+    def get_absolute_url(self):
+      return reverse('movie_detail', kwargs={'movie_id': self.id})
+
 
 class Personnel(models.Model):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=50)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-
-
-class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150)
-    date = models.DateField("posted on")
-    content = models.CharField(max_length=500)
-
 
 class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -47,3 +42,12 @@ class Opinion(models.Model):
 
     def get_absolute_url(self):
       return reverse('detail', kwargs={'opinion_id': self.id})
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=150)
+    date = models.DateField("posted on")
+    content = models.CharField(max_length=500)
+
+    def __str__(self):
+      return self.title

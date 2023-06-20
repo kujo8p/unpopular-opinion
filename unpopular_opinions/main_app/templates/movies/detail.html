@@ -1,16 +1,18 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1> {{ movie.title }} </h1>
+<h1 class="center"> {{ movie.title }} </h1>
 
 {% for opinion in movie.opinion_set.all %}
+<div class="container">
 <a href="{% url 'opinion_detail' opinion.id %}"></a>
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">{{ opinion.movie }}</span>
+  <div class="card grey darken-3">
+    <div class="card-content grey darken-3">
+      <span class="card-title grey darken-3">{{ opinion.movie }}</span>
       <p>Opinion: {{ opinion.tldr }}</p>
     </div>
   </div>
 </a>
+</div>
 {% endfor %}
 
 {% endblock %}
