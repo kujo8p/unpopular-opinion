@@ -39,6 +39,10 @@ def movie_index(request):
     movie = Movie.objects.all()
     return render(request, "movies/index.html", {"movie": movie})
 
+class MovieCreate(CreateView):
+    model = Movie
+    fields = ["title", "release_year"]
+
 
 def signup(request):
     error_message = ''
