@@ -49,6 +49,13 @@ class MovieCreate(CreateView):
     model = Movie
     fields = ["title", "release_year"]
 
+def add_comment(request, opinion_id):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        new_comment = form.save(commit=False)
+        new_comment.opinion_id = opinion_id
+        new_comment.save()
+    return redirect('opinion_detail', opinion_id=opinion_id)
 
 def signup(request):
     error_message = ''
