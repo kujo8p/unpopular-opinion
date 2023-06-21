@@ -57,8 +57,8 @@ class Opinion(models.Model):
     person = models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
     person_role = models.CharField('role', choices=ROLES, default=ROLES[0], null=True)
     movie_choice = models.CharField('movie', max_length=150)
-    person_choice = models.CharField('cast or crew member', max_length=150)
-    person_movie = models.CharField('movie', max_length=150)
+    person_choice = models.CharField('cast or crew member', max_length=150, null=True)
+    person_movie = models.CharField('movie', max_length=150, null=True)
     
 
     def __str__(self):
