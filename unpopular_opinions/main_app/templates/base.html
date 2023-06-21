@@ -27,7 +27,7 @@
           <li><a href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
           <li><a href="{% url 'opinion' %}">Opinions</a></li>
-          <li><a href="{% url 'opinion_create' %}">Add an Opinion</a></li>
+          <li><a href="{% url 'opinion_type' %}">Add an Opinion</a></li>
           <li><a href="{% url 'movies' %}">Movies</a></li>
           <li><a href="{% url 'movies_create' %}">Add a Movie</a></li>
           <li><a href="{% url 'logout' %}">Log Out</a></li>

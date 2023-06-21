@@ -59,6 +59,11 @@ class OpinionPersonCreate(CreateView):
     form_class = OpinionFormPerson
     template_name_suffix = '_person_form'
 
+def load_movies(request):
+    personnel_id = request.GET('person')
+    movies = Personnel.objects.get(id=personnel_id).movies.all()
+    return render(request, 'opinions/person_movie_dropdown.html', {'movies': movies})
+
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion
     fields = ['tldr', 'content']
@@ -85,7 +90,6 @@ def add_opinion(request):
     form = OpinionForm(request.POST)
     if form.is_valid():
         new_opinion = form.save(commit=False)
-        new_opinion.movie_id = request.POST['movie_choice']
         new_opinion.user_id = request.user.id
         new_opinion.save()
     return redirect('opinion')
