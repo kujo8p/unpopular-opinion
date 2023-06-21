@@ -57,6 +57,7 @@ class OpinionCreate(CreateView):
 class OpinionPersonCreate(CreateView):
     model = Opinion
     form_class = OpinionFormPerson
+    template_name_suffix = '_person_form'
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion
