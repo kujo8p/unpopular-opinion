@@ -53,14 +53,7 @@ class Opinion(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     content = models.CharField('explanation', max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    check_person = models.BooleanField(default=False)
-    person = models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
-    person_role = models.CharField('role', choices=ROLES, default=ROLES[0], null=True)
-    movie_choice = models.CharField('movie', max_length=150)
-    person_choice = models.CharField('cast or crew member', max_length=150)
-    person_movie = models.CharField('movie', max_length=150)
     
-
     def __str__(self):
       return self.tldr
 
