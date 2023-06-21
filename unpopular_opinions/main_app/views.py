@@ -9,7 +9,6 @@ from django.contrib.auth import login
 
 # name possibly subject to change
 from django.contrib.auth.forms import UserCreationForm
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -26,7 +25,8 @@ def about(request):
 # Function names may change when I know what has been happening on the  Front-end.
 def opinions_index(request):
     opinions = Opinion.objects.filter(user=request.user)
-    return render(request, "opinions/index.html", {"opinions": opinions})
+    opinion = Opinion.objects.all()
+    return render(request, "opinions/index.html", {"opinions": opinions, 'opinion': opinion})
 
 
 def opinion_detail(request, opinion_id):
