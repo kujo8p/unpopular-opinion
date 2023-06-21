@@ -15,6 +15,16 @@
 </head>
 <body>
   <header class="navbar-fixed grey darken-4">
+    
+    
+    <ul id="dropdown1" class="dropdown-content grey darken-4 text-lighten-5">
+      <li><a href="{% url 'opinion' %}">Opinions</a></li>
+      <li><a href="{% url 'opinion_create' %}">Add an Opinion</a></li>
+    </ul>
+    <ul id="dropdown2" class="dropdown-content grey darken-4 text-lighten-5">
+      <li><a href="{% url 'movies' %}">Movies</a></li>
+      <li><a href="{% url 'movies_create' %}">Add a Movie</a></li>
+    </ul>
     <nav class="grey darken-4">
       <div class="nav-wrapper container grey darken-4">
         <ul>
@@ -23,13 +33,11 @@
               href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Unpopular Opinions</a>
           </li>
         </ul>
-        <ul class="right">
+        <ul class="right hide-on-med-and-down">
           <li><a href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
-          <li><a href="{% url 'opinion' %}">Opinions</a></li>
-          <li><a href="{% url 'opinion_create' %}">Add an Opinion</a></li>
-          <li><a href="{% url 'movies' %}">Movies</a></li>
-          <li><a href="{% url 'movies_create' %}">Add a Movie</a></li>
+          <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown1">Opinions<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown2">Movies<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a href="{% url 'logout' %}">Log Out</a></li>
         {% else %}
           <li><a href="{% url 'login' %}">Log In</a></li>
@@ -37,7 +45,18 @@
         {% endif %}
         </ul>
       </div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems);
+  });
+      </script>
     </nav>
+
+
+
+
+
   </header>
   <main>
     {% block content %} 
