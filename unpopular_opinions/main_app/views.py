@@ -43,15 +43,18 @@ def opinion_detail(request, opinion_id):
 
 class OpinionCreate(CreateView):
     model = Opinion
-    fields = ['tldr', 'content', 'movie_choice']
+    fields = ["tldr", "content", "movie_choice"]
+
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion
-    fields = ['tldr', 'content']
+    fields = ["tldr", "content"]
+
 
 class OpinionDelete(LoginRequiredMixin, DeleteView):
     model = Opinion
-    success_url = '/opinion'
+    success_url = "/opinion"
+
 
 def movie_index(request):
     movies = Movie.objects.all()
@@ -67,10 +70,7 @@ class MovieCreate(CreateView):
     model = Movie
     fields = ["title", "release_year"]
 
-<<<<<<< HEAD
 
-def add_comment(request, opinion_id, user_id):
-=======
 def add_opinion(request):
     form = OpinionForm(request.POST)
     if form.is_valid():
@@ -78,22 +78,18 @@ def add_opinion(request):
         new_opinion.movie_id = movie_id
         new_opinion.user_id = request.user.id
         new_opinion.save()
-    return redirect('opinion_index', opinion_id=opinion_id)
+    return redirect("opinion_index", opinion_id=opinion_id)
+
 
 def add_comment(request, opinion_id):
->>>>>>> d498c86612d6ac8cf9d35fa378cd039dadf40546
     form = CommentForm(request.POST)
     if form.is_valid():
         new_comment = form.save(commit=False)
         new_comment.opinion_id = opinion_id
         new_comment.user_id = request.user.id
         new_comment.save()
-<<<<<<< HEAD
-    return redirect("opinion_detail", opinion_id=opinion_id, user_id=user_id)
+    return redirect("opinion_detail", opinion_id=opinion_id)
 
-=======
-    return redirect('opinion_detail', opinion_id=opinion_id)
->>>>>>> d498c86612d6ac8cf9d35fa378cd039dadf40546
 
 def signup(request):
     error_message = ""
