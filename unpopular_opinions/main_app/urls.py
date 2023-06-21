@@ -20,5 +20,6 @@ urlpatterns = [
         "opinion/<int:opinion_id>/add_comment/", views.add_comment, name="add_comment"
     ),
     path("accounts/signup/", views.signup, name="signup"),
+    # URL path name subject to change
     path("api-auth/", include("rest_framework.urls")),
 ]

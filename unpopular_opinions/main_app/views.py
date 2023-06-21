@@ -6,6 +6,7 @@ from .models import Opinion, Movie, Comment, User
 from .forms import CommentForm
 from django.contrib.auth import login
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+import requests
 
 
 # name possibly subject to change
@@ -109,3 +110,15 @@ def signup(request):
     form = UserCreationForm()
     context = {"form": form, "error_message": error_message}
     return render(request, "registration/signup.html", context)
+
+
+#  Code snippet from rapidAPI.com MOviesDatabase API hosted by RapidAPI.com
+def get_movie_data(request):
+    url = "https://moviesdatabase.p.rapidapi.com/titles/series/%7BseriesId%7D"
+    headers = {
+        "X-RapidAPI-Key": "c512ca0434mshe85dfc7c775587cp1d3378jsn2f8642ed9947",
+        "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com",
+    }
+
+    response = requests.get(url, headers=headers)
+    data = response.json()
