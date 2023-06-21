@@ -28,14 +28,24 @@ class Movie(models.Model):
 class Personnel(models.Model):
     name = models.CharField(max_length=100)
     role = models.CharField(max_length=50)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    movies = models.ManyToManyField(Movie)
+    movie_choice = models.CharField('movie', max_length=150)
 
-movies = Movie.objects.all()
+    def __str__(self):
+      return self.name
 
-Movie_Choices = [("Select Movie","Select Movie")]
-for movie in movies:
-    Movie_Choices.append((movie.id, movie.title))
+    def get_absolute_url(self):
+      return reverse('personnel_detail', kwargs={'personnel_id': self.id})
 
+ROLES = (
+  ("Actor", "Actor"),
+  ("Director", "Director"),
+  ("Writer", "Writer"),
+  ("Producer", "Producer"),
+  ("Casting Director", "Casting Director"),
+  ("Cinematographer", "Cinematographer"),
+  ("Score", "Score")
+)
 
 class Opinion(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,7 +53,13 @@ class Opinion(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     content = models.CharField('explanation', max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    check_person = models.BooleanField(default=False)
+    person = models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
+    person_role = models.CharField('role', choices=ROLES, default=ROLES[0], null=True)
     movie_choice = models.CharField('movie', max_length=150)
+    person_choice = models.CharField('cast or crew member', max_length=150)
+    person_movie = models.CharField('movie', max_length=150)
+    
 
     def __str__(self):
       return self.tldr

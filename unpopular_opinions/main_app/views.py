@@ -2,8 +2,8 @@ import os
 import uuid
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Opinion, Movie, Comment, User
-from .forms import CommentForm, OpinionForm
+from .models import Opinion, Movie, Comment, User, Personnel
+from .forms import CommentForm, OpinionForm, OpinionFormPerson
 from django.contrib.auth import login
 
 
@@ -37,9 +37,26 @@ def opinion_detail(request, opinion_id):
     'opinion': opinion, 'comments': comments, 'comment_form': comment_form
     })
 
+def personnel_index(request):
+    personnel = Personnel.objects.all()
+    return render(request, "personnel/index.html", {"personnel": personnel})
+
+
+def personnel_detail(request, personnel_id):
+    person = Personnel.objects.get(id=personnel_id)
+    return render(request, 'personnel/detail.html', {
+    'person': person})
+
+def opinion_type(request):
+    return render(request, "opinions/type.html")
+
 class OpinionCreate(CreateView):
     model = Opinion
     form_class = OpinionForm
+
+class OpinionPersonCreate(CreateView):
+    model = Opinion
+    form_class = OpinionFormPerson
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion
