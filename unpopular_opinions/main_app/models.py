@@ -43,7 +43,7 @@ class Opinion(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     content = models.CharField('explanation', max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    movie_choice = models.CharField(choices=Movie_Choices, default=Movie_Choices[0])
+    movie_choice = models.CharField('movie', max_length=150)
 
     def __str__(self):
       return self.tldr
