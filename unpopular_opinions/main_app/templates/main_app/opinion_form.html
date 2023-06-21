@@ -7,9 +7,7 @@
   {% else %}
     <h1>Add Opinion</h1>
   {% endif %}
-
   <form action="" method="POST" class="grey darken-4">
-
     {% csrf_token %}
     <table class="grey darken-4">
       {{ form.as_table }}

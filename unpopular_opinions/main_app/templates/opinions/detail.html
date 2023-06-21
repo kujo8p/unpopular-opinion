@@ -38,6 +38,7 @@
           <!-- <p>Edited: {{ opinion.recent_edit }}</p> -->
           <!-- {% endif %} -->
           <div class="card-action">
+            <a href="{% url 'opinion_update' opinion.id %}">Update</a>
             <a href="{% url 'opinion_delete' opinion.id %}">Delete</a>
           </div>
       </div>
