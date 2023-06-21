@@ -3,7 +3,7 @@ import uuid
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Opinion, Movie, Comment, User
-from .forms import CommentForm
+from .forms import CommentForm, OpinionForm
 from django.contrib.auth import login
 
 
@@ -39,7 +39,7 @@ def opinion_detail(request, opinion_id):
 
 class OpinionCreate(CreateView):
     model = Opinion
-    fields = ['tldr', 'content', 'movie_choice']
+    form_class = OpinionForm
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion
@@ -67,10 +67,10 @@ def add_opinion(request):
     form = OpinionForm(request.POST)
     if form.is_valid():
         new_opinion = form.save(commit=False)
-        new_opinion.movie_id = movie_id
+        new_opinion.movie_id = request.POST['movie_choice']
         new_opinion.user_id = request.user.id
         new_opinion.save()
-    return redirect('opinion_index', opinion_id=opinion_id)
+    return redirect('opinion')
 
 def add_comment(request, opinion_id):
     form = CommentForm(request.POST)

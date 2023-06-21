@@ -7,6 +7,7 @@ urlpatterns = [
     path("opinion/", views.opinions_index, name="opinion"),
     path("opinion/<int:opinion_id>/", views.opinion_detail, name='opinion_detail'),
     path('opinion/create/', views.OpinionCreate.as_view(), name='opinion_create'),
+    path('opinion/add_opinion/', views.add_opinion, name='add_opinion'),
     path('opinion/<int:pk>/update/', views.OpinionUpdate.as_view(), name='opinion_update'),
     path('opinion/<int:pk>/delete', views.OpinionDelete.as_view(), name='opinion_delete'),
     path("movies/", views.movie_index, name="movies"),
