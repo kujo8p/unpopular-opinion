@@ -38,6 +38,7 @@
           <!-- <p>Edited: {{ opinion.recent_edit }}</p> -->
           <!-- {% endif %} -->
           <div class="card-action">
+            <a href="{% url 'opinion_update' opinion.id %}">Update</a>
             <a href="{% url 'opinion_delete' opinion.id %}">Delete</a>
           </div>
       </div>
@@ -64,23 +65,19 @@
       {{ comment_form.as_p }}
       <input type="submit" class="btn grey darken-4" value="Add Comment"/>
     </form>
-    <table class="striped">
-      <thead>
-        <tr>
-          <th><h3>Comments</h3></th>
-        </th>
-        </tr>
-      </thead>
-      <tbody class="grey darken-3">
-        {% for comment in comments %}
-        <tr class="grey darken-3">
-          <td>{{comment.content}} </br> - {{comment.user}} </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
+    
+    <h3>Comments</h3>
+{% for comment in opinion.comment_set.all %}
+
+    <div class="card grey darken-3">
+      <div class="card-content grey darken-3">
+        <p>{{comment.user}}</p>
+        <br>
+        <p>{{comment.content}}</p>
+      </div>
+    </div>
+
+{% endfor %}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.parallax');

@@ -65,7 +65,7 @@ class Opinion(models.Model):
       return self.tldr
 
     def get_absolute_url(self):
-      return reverse('detail', kwargs={'opinion_id': self.id})
+      return reverse('opinion_detail', kwargs={'opinion_id': self.id})
 
 class Comment(models.Model):
     title = models.CharField(max_length=150)
