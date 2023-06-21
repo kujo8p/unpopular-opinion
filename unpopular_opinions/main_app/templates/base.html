@@ -27,6 +27,11 @@
       <li><a href="{% url 'movies' %}" class="grey-text text-lighten-5">Movies</a></li>
       <li><a href="{% url 'movies_create' %}" class="grey-text text-lighten-5">Add a Movie</a></li>
     </ul>
+    <ul id="dropdown3" class="dropdown-content grey darken-4">
+      <li><a href="{% url 'personnel' %}" class="grey-text text-lighten-5">Personnel</a></li>
+      <li><a href="{% url 'opinion_person_create' %}" class="grey-text text-lighten-5">Add a Person</a></li>
+      <li><a href="{% url 'opinion_type' %}" class="grey-text text-lighten-5">Add a Post</a></li>
+    </ul>
     <nav class="grey darken-4">
       <div class="nav-wrapper container grey darken-4">
         <ul>
@@ -40,6 +45,7 @@
           {% if user.is_authenticated %}
           <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown1">Opinions<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown2">Movies<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown3">Personnel<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a href="{% url 'logout' %}">Log Out</a></li>
         {% else %}
           <li><a href="{% url 'login' %}">Log In</a></li>

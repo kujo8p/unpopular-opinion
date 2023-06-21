@@ -5,8 +5,22 @@
 <div class="container">
   <h1 class="center">Is Your Opinion About:</h1>
   <hr>
+  <br>
   <!-- Description of our product -->
-  <a href="{% url 'opinion_create' %}">A Movie</a>
-  <a href="{% url 'opinion_person_create' %}">A Cast or Crew Member</a>
+  <div class="card grey darken-3 col s6">
+    <a href="{% url 'opinion_create' %}">
+    <div class="card-content center"><h2>A Movie</h2>
+    </div>
+  </a>
+  </div>
+  </div>
+  <br>
+  <div class="container col s6"">
+  <div class="card grey darken-3">
+    <a href="{% url 'opinion_person_create' %}">
+    <div class="card-content center"><h2>A Cast or Crew Member</h2></div>
+</div>
+</a>
+</div>
 </div>
   {% endblock %}
