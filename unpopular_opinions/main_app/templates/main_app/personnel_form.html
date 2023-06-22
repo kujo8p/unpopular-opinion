@@ -4,9 +4,11 @@
   {% if object %}
     <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
   {% else %}
-    <h1>Add Person</h1>
+  <div class="container">
+    <h1>Add Cast and Crew</h1>
+  </div>
   {% endif %}
-
+<div class="container">
   <form action="" method="POST">
 
     {% csrf_token %}
@@ -14,8 +16,9 @@
 
       {{ form.as_table }}
     </table>
+    <br>
     <input type="submit" value="Submit" class="btn large grey darken-4">
   </form>
-
+</div>
   
 {% endblock %}

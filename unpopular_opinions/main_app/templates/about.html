@@ -11,7 +11,11 @@
         <h5 class="header col s12 light grey-text text-lighten-5">At Unpopular Opinions we let users post their unpopular opinions about sci-fi shows and movies, and invites the app's community to read and respond to these opinions.</h5>
       </div>
       <div class="row center">
+        {% if user.is_authenticated %}
         <a href="{% url 'movies_create' %}" class="waves-effect waves-light btn-large grey darken-4">Create a Movie</a>
+        {% else %}
+        <a href="{% url 'signup' %}" class="waves-effect waves-light btn-large grey darken-4">Sign Up</a>
+        {% endif %}
       </div>
     </div>
     <div class="parallax">
