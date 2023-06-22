@@ -27,9 +27,7 @@ class Movie(models.Model):
 
 class Personnel(models.Model):
     name = models.CharField(max_length=100)
-    role = models.CharField(max_length=50)
     movies = models.ManyToManyField(Movie)
-    movie_choice = models.CharField('movie', max_length=150)
 
     def __str__(self):
       return self.name
@@ -53,7 +51,7 @@ class Opinion(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     content = models.CharField('explanation', max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    person = models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
+    person = models.ForeignKey(Personnel, on_delete=models.CASCADE, db_column='cast or crew member', null=True)
     person_role = models.CharField('role', choices=ROLES, default=ROLES[0], null=True)
     movie_choice = models.CharField('movie', max_length=150)
     person_choice = models.CharField('cast or crew member', max_length=150, null=True)

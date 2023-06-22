@@ -54,6 +54,11 @@ class OpinionCreate(CreateView):
     model = Opinion
     form_class = OpinionForm
 
+def load_movies(request):
+    personnel_id = request.GET.get('person')
+    movies = Personnel.objects.get(id=personnel_id).movies.all().order_by('title')
+    return render(request, 'opinions/person_movie_dropdown.html', {'movies': movies})
+
 class OpinionPersonCreate(CreateView):
     model = Opinion
     form_class = OpinionFormPerson
@@ -90,7 +95,14 @@ def add_opinion(request):
     form = OpinionForm(request.POST)
     if form.is_valid():
         new_opinion = form.save(commit=False)
-        new_opinion.movie_id = request.POST['movie_choice']
+        new_opinion.user_id = request.user.id
+        new_opinion.save()
+    return redirect('opinion')
+
+def add_person_opinion(request):
+    form = OpinionFormPerson(request.POST)
+    if form.is_valid():
+        new_opinion = form.save(commit=False)
         new_opinion.user_id = request.user.id
         new_opinion.save()
     return redirect('opinion')
