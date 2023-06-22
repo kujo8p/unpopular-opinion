@@ -43,9 +43,9 @@ def personnel_index(request):
 
 
 def personnel_detail(request, personnel_id):
-    person = Personnel.objects.get(id=personnel_id)
+    personnel = Personnel.objects.get(id=personnel_id)
     return render(request, 'personnel/detail.html', {
-    'person': person})
+    'personnel': personnel })
 
 def opinion_type(request):
     return render(request, "opinions/type.html")
@@ -80,6 +80,11 @@ def movie_detail(request, movie_id):
 class MovieCreate(CreateView):
     model = Movie
     fields = ["title", "release_year"]
+
+class PersonnelCreate(CreateView):
+    model = Personnel
+    fields = ["name"]
+    success_url = '/personnel'
 
 def add_opinion(request):
     form = OpinionForm(request.POST)
