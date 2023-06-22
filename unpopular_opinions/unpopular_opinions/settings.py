@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+# Creates and reads an instance of the environment variables
+import dotenv
+
+dotenv.load_dotenv()
 
 from pathlib import Path
 

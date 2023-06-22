@@ -1,19 +1,30 @@
 import os
 import uuid
+import requests
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Opinion, Movie, Comment, User
-from .forms import CommentForm
+from .models import Opinion, Movie, Comment, User, Personnel
+from .forms import CommentForm, OpinionForm, OpinionFormPerson
 from django.contrib.auth import login
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-import requests
-
+from rest_framework.response import response
+from rest_framework.decorators import api_view
+from unpopular_opinions.models import Movie
+from .serializers import MovieSerializer
 
 # name possibly subject to change
 from django.contrib.auth.forms import UserCreationForm
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+# The example uses Item/Items instead. If debugging issues arise.
+# Trying multiple methods to connect API, keeping this one until I don't need it.
+@api_view(["GET"])
+def getData(request):
+    movies = Movie.onjects.all()
+    serializer = MovieSerializer(movies, many=True)
+    return Response(serializer.data)
 
 
 # Create your views here.
@@ -25,10 +36,13 @@ def about(request):
     return render(request, "about.html")
 
 
-@login_required
-def opinion_index(request):
-    opinion = Opinion.objects.filter(user=request.user)
-    return render(request, "opinions/index.html", {"opinion": opinion})
+# Function names may change when I know what has been happening on the  Front-end.
+def opinions_index(request):
+    opinions = Opinion.objects.filter(user=request.user)
+    opinion = Opinion.objects.all()
+    return render(
+        request, "opinions/index.html", {"opinions": opinions, "opinion": opinion}
+    )
 
 
 def opinion_detail(request, opinion_id):
@@ -42,9 +56,29 @@ def opinion_detail(request, opinion_id):
     )
 
 
+def personnel_index(request):
+    personnel = Personnel.objects.all()
+    return render(request, "personnel/index.html", {"personnel": personnel})
+
+
+def personnel_detail(request, personnel_id):
+    person = Personnel.objects.get(id=personnel_id)
+    return render(request, "personnel/detail.html", {"person": person})
+
+
+def opinion_type(request):
+    return render(request, "opinions/type.html")
+
+
 class OpinionCreate(CreateView):
     model = Opinion
-    fields = ["tldr", "content", "movie_choice"]
+    form_class = OpinionForm
+
+
+class OpinionPersonCreate(CreateView):
+    model = Opinion
+    form_class = OpinionFormPerson
+    template_name_suffix = "_person_form"
 
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
@@ -76,10 +110,10 @@ def add_opinion(request):
     form = OpinionForm(request.POST)
     if form.is_valid():
         new_opinion = form.save(commit=False)
-        new_opinion.movie_id = movie_id
+        new_opinion.movie_id = request.POST["movie_choice"]
         new_opinion.user_id = request.user.id
         new_opinion.save()
-    return redirect("opinion_index", opinion_id=opinion_id)
+    return redirect("opinion")
 
 
 def add_comment(request, opinion_id):
@@ -110,15 +144,3 @@ def signup(request):
     form = UserCreationForm()
     context = {"form": form, "error_message": error_message}
     return render(request, "registration/signup.html", context)
-
-
-#  Code snippet from rapidAPI.com MOviesDatabase API hosted by RapidAPI.com
-def get_movie_data(request):
-    url = "https://moviesdatabase.p.rapidapi.com/titles/series/%7BseriesId%7D"
-    headers = {
-        "X-RapidAPI-Key": "c512ca0434mshe85dfc7c775587cp1d3378jsn2f8642ed9947",
-        "X-RapidAPI-Host": "moviesdatabase.p.rapidapi.com",
-    }
-
-    response = requests.get(url, headers=headers)
-    data = response.json()

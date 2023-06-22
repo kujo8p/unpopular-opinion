@@ -32,3 +32,11 @@ img {
 tbody {
   background-color: #424242;
 }
+
+td {
+  padding: 15px 15px;
+}
+
+a {
+  color: #fafafa;
+}
