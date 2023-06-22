@@ -1,9 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container">
-  {% if opinion.personnel %}
-  <h3>{{ opinion.personnel }}</h3>
-  {% endif %}
+
   </div>
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
@@ -25,6 +23,9 @@
     </div>
   </div>
   <div class="container">
+  {% if opinion.person %}
+  <h3>{{ opinion.person }}</h3>
+  {% endif %}
   <h3>{{ opinion.movie}}</h3>
   
   <div class="row">

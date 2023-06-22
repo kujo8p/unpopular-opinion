@@ -94,6 +94,14 @@ def add_opinion(request):
         new_opinion.save()
     return redirect('opinion')
 
+def add_person_opinion(request):
+    form = OpinionFormPerson(request.POST)
+    if form.is_valid():
+        new_opinion = form.save(commit=False)
+        new_opinion.user_id = request.user.id
+        new_opinion.save()
+    return redirect('opinion')
+
 def add_comment(request, opinion_id):
     form = CommentForm(request.POST)
     if form.is_valid():
