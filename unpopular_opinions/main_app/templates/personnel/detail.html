@@ -15,6 +15,7 @@
     {% endfor %}
   </h4>
 </div>
+{% if personnel.opinion_set.count %}
 {% for opinion in personnel.opinion_set.all %}
   <div class="container">
     <a href="{% url 'opinion_detail' opinion.id %}"></a>
@@ -27,6 +28,7 @@
     </a>
   </div>
 {% endfor %}
+{% endif %}
 <div class="container">
   <h4> Add a Movie to {{ personnel.name }}'s Credits:
     {% if available_movies.count %}
