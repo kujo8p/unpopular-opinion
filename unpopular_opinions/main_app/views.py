@@ -38,11 +38,8 @@ def about(request):
 
 # Function names may change when I know what has been happening on the  Front-end.
 def opinions_index(request):
-    opinions = Opinion.objects.filter(user=request.user)
-    opinion = Opinion.objects.all()
-    return render(
-        request, "opinions/index.html", {"opinions": opinions, "opinion": opinion}
-    )
+    opinions = Opinion.objects.all()
+    return render(request, "opinions/index.html", {"opinions": opinions})
 
 
 def opinion_detail(request, opinion_id):
@@ -62,20 +59,42 @@ def personnel_index(request):
 
 
 def personnel_detail(request, personnel_id):
-    person = Personnel.objects.get(id=personnel_id)
-    return render(request, "personnel/detail.html", {"person": person})
+    personnel = Personnel.objects.get(id=personnel_id)
+    current_movies = personnel.movies.all().values_list("id")
+    available_movies = Movie.objects.exclude(id__in=current_movies)
+    return render(
+        request,
+        "personnel/detail.html",
+        {"personnel": personnel, "available_movies": available_movies},
+    )
+
+
+def assoc_movie(request, personnel_id, movie_id):
+    Personnel.objects.get(id=personnel_id).movies.add(movie_id)
+    return redirect("personnel_detail", personnel_id=personnel_id)
+
+
+def unassoc_movie(request, personnel_id, movie_id):
+    Personnel.objects.get(id=personnel_id).movies.remove(movie_id)
+    return redirect("personnel_detail", personnel_id=personnel_id)
 
 
 def opinion_type(request):
     return render(request, "opinions/type.html")
 
 
-class OpinionCreate(CreateView):
+class OpinionCreate(LoginRequiredMixin, CreateView):
     model = Opinion
     form_class = OpinionForm
 
 
-class OpinionPersonCreate(CreateView):
+def load_movies(request):
+    personnel_id = request.GET.get("person")
+    movies = Personnel.objects.get(id=personnel_id).movies.all().order_by("title")
+    return render(request, "opinions/person_movie_dropdown.html", {"movies": movies})
+
+
+class OpinionPersonCreate(LoginRequiredMixin, CreateView):
     model = Opinion
     form_class = OpinionFormPerson
     template_name_suffix = "_person_form"
@@ -101,16 +120,30 @@ def movie_detail(request, movie_id):
     return render(request, "movies/detail.html", {"movie": movie})
 
 
-class MovieCreate(CreateView):
+class MovieCreate(LoginRequiredMixin, CreateView):
     model = Movie
     fields = ["title", "release_year"]
+
+
+class PersonnelCreate(LoginRequiredMixin, CreateView):
+    model = Personnel
+    fields = ["name"]
+    success_url = "/personnel"
 
 
 def add_opinion(request):
     form = OpinionForm(request.POST)
     if form.is_valid():
         new_opinion = form.save(commit=False)
-        new_opinion.movie_id = request.POST["movie_choice"]
+        new_opinion.user_id = request.user.id
+        new_opinion.save()
+    return redirect("opinion")
+
+
+def add_person_opinion(request):
+    form = OpinionFormPerson(request.POST)
+    if form.is_valid():
+        new_opinion = form.save(commit=False)
         new_opinion.user_id = request.user.id
         new_opinion.save()
     return redirect("opinion")
