@@ -43,8 +43,18 @@ def personnel_index(request):
 
 def personnel_detail(request, personnel_id):
     personnel = Personnel.objects.get(id=personnel_id)
+    current_movies = personnel.movies.all().values_list('id')
+    available_movies = Movie.objects.exclude(id__in=current_movies)
     return render(request, 'personnel/detail.html', {
-    'personnel': personnel })
+    'personnel': personnel, 'available_movies': available_movies })
+
+def assoc_movie(request, personnel_id, movie_id):
+    Personnel.objects.get(id=personnel_id).movies.add(movie_id)
+    return redirect('personnel_detail', personnel_id=personnel_id)
+
+def unassoc_movie(request, personnel_id, movie_id):
+    Personnel.objects.get(id=personnel_id).movies.remove(movie_id)
+    return redirect('personnel_detail', personnel_id=personnel_id)
 
 def opinion_type(request):
     return render(request, "opinions/type.html")
