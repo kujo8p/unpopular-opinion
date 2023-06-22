@@ -24,9 +24,8 @@ def about(request):
 
 # Function names may change when I know what has been happening on the  Front-end.
 def opinions_index(request):
-    opinions = Opinion.objects.filter(user=request.user)
-    opinion = Opinion.objects.all()
-    return render(request, "opinions/index.html", {"opinions": opinions, 'opinion': opinion})
+    opinions = Opinion.objects.all()
+    return render(request, "opinions/index.html", {'opinions': opinions})
 
 
 def opinion_detail(request, opinion_id):
@@ -50,7 +49,7 @@ def personnel_detail(request, personnel_id):
 def opinion_type(request):
     return render(request, "opinions/type.html")
 
-class OpinionCreate(CreateView):
+class OpinionCreate(LoginRequiredMixin, CreateView):
     model = Opinion
     form_class = OpinionForm
 
@@ -59,7 +58,7 @@ def load_movies(request):
     movies = Personnel.objects.get(id=personnel_id).movies.all().order_by('title')
     return render(request, 'opinions/person_movie_dropdown.html', {'movies': movies})
 
-class OpinionPersonCreate(CreateView):
+class OpinionPersonCreate(LoginRequiredMixin, CreateView):
     model = Opinion
     form_class = OpinionFormPerson
     template_name_suffix = '_person_form'
@@ -82,11 +81,11 @@ def movie_detail(request, movie_id):
         'movie': movie
     })
 
-class MovieCreate(CreateView):
+class MovieCreate(LoginRequiredMixin, CreateView):
     model = Movie
     fields = ["title", "release_year"]
 
-class PersonnelCreate(CreateView):
+class PersonnelCreate(LoginRequiredMixin, CreateView):
     model = Personnel
     fields = ["name"]
     success_url = '/personnel'
