@@ -54,15 +54,15 @@ class OpinionCreate(CreateView):
     model = Opinion
     form_class = OpinionForm
 
+def load_movies(request):
+    personnel_id = request.GET.get('person')
+    movies = Personnel.objects.get(id=personnel_id).movies.all().order_by('title')
+    return render(request, 'opinions/person_movie_dropdown.html', {'movies': movies})
+
 class OpinionPersonCreate(CreateView):
     model = Opinion
     form_class = OpinionFormPerson
     template_name_suffix = '_person_form'
-
-def load_movies(request):
-    personnel_id = request.GET('person')
-    movies = Personnel.objects.get(id=personnel_id).movies.all()
-    return render(request, 'opinions/person_movie_dropdown.html', {'movies': movies})
 
 class OpinionUpdate(LoginRequiredMixin, UpdateView):
     model = Opinion

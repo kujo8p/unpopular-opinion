@@ -22,6 +22,15 @@ class OpinionFormPerson(ModelForm):
     super(OpinionFormPerson, self).__init__(*args, **kwargs)
     self.fields['movie'].queryset = Movie.objects.none()
 
+    if 'person' in self.data:
+      try:
+          person_id = int(self.data.get('person'))
+          self.fields['movie'].queryset = Personnel.objects.get(id=person_id).movies.all().order_by('title')
+      except (ValueError, TypeError):
+        pass
+    elif self.instance.pk:
+      self.fields['movie'].queryset = self.instance.person.movie_set.order_by('title')
+
   class Meta:
     model = Opinion
     fields = ['person', 'movie', 'person_role', 'tldr', 'content']

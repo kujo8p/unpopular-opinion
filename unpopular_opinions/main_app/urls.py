@@ -19,4 +19,5 @@ urlpatterns = [
     path('personnel/', views.personnel_index, name='personnel'),
     path('personnel/<int:personnel_id>/', views.personnel_detail, name='personnel_detail'),
     path('accounts/signup/', views.signup, name='signup'),
+    path('ajax/load-movies/', views.load_movies, name='load_movies')
 ]
