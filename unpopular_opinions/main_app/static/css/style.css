@@ -40,3 +40,14 @@ td {
 a {
   color: #fafafa;
 }
+
+#flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: 10em;
+}
+
+.collapsible {
+  width: 300px;
+}

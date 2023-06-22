@@ -3,23 +3,50 @@
 <div class="container">
 <h1> {{ personnel.name }} </h1>
 </div>
-<div class="container">
+
+<div class="container" >
 {% if personnel.opinion_set.count %}
-  <h4> Movies:
-    </br>
+<h4>Movies:</h4>
+  <div id="flex-wrap"> 
     {% for movie in personnel.movies.all %}
-    {{ movie.title }}
+
+    <div>
+    <h4>{{ movie.title }}</h4>
     <form action="{% url 'unassoc_movie' personnel.id movie.id %}" method="POST">
       {% csrf_token %}
-      <button type="submit" class="btn">Remove</button>
+      <button type="submit" class="btn-large grey darken-3">Remove</button>
     </form>
+  </div>
     {% endfor %}
-  </h4>
+  </div>
+  <br>
   {% endif %}
+  <h4>Add a Movie to {{ personnel.name }}'s Credits:</h4>
+<ul class="collapsible grey darken-3">
+  <li>
+    <div class="collapsible-header grey darken-3">Add a Movie<i class="material-icons right">arrow_drop_down</i></div>
+    <div class="collapsible-body grey darken-3">
+      {% if available_movies.count %}
+    {% for movie in available_movies %}</h4>
+    <br>
+    <div><h4>{{ movie.title }}</h4>
+    <form action="{% url 'assoc_movie' personnel.id movie.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn-large grey darken-4">Add</button>
+    </form>
+    </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+  </li>
+</ul>
 </div>
+</div>
+
+<div class="container">
+<h3>Opinions</h3>
 {% if personnel.opinion_set.count %}
 {% for opinion in personnel.opinion_set.all %}
-  <div class="container">
     <a href="{% url 'opinion_detail' opinion.id %}"></a>
       <div class="card">
         <div class="card-content grey darken-3">
@@ -31,21 +58,12 @@
   </div>
 {% endfor %}
 {% endif %}
-<div class="container">
-  <h4> Add a Movie to {{ personnel.name }}'s Credits:
-    {% if available_movies.count %}
-      {% for movie in available_movies %}
-        <div class="container">
-          <h4>{{ movie.title }}</h4>
-          <form action="{% url 'assoc_movie' personnel.id movie.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn">Add</button>
-          </form>
-        </div>
-      {% endfor %}
-    {% endif %}
-  </h4>
-</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
 
+</script>
 
 {% endblock %}
