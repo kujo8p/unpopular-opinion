@@ -5,11 +5,9 @@
 </div>
 
 <div class="container" >
-{% if personnel.opinion_set.count %}
 <h4>Movies:</h4>
   <div id="flex-wrap"> 
     {% for movie in personnel.movies.all %}
-
     <div>
     <h4>{{ movie.title }}</h4>
     <form action="{% url 'unassoc_movie' personnel.id movie.id %}" method="POST">
@@ -20,7 +18,7 @@
     {% endfor %}
   </div>
   <br>
-  {% endif %}
+
   <h4>Add a Movie to {{ personnel.name }}'s Credits:</h4>
 <ul class="collapsible grey darken-3">
   <li>
