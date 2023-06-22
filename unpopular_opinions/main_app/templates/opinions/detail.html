@@ -1,9 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container">
-  {% if opinion.personnel %}
-  <h3>{{ opinion.personnel }}</h3>
-  {% endif %}
+
   </div>
   <div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
@@ -25,8 +23,15 @@
     </div>
   </div>
   <div class="container">
+  {% if opinion.person %}
+  <h3>{{ opinion.movie }}: {{ opinion.person }} ({{opinion.person_role}}) </h3>
+  {% else %}
   <h3>{{ opinion.movie}}</h3>
+
+  {% endif %}
+
   <h5> by {{ opinion.user }}</h5>
+
   <div class="row">
     <div class="col s6">
       <div class="card">

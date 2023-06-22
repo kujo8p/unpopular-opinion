@@ -10,6 +10,7 @@ urlpatterns = [
     path('opinion/create/', views.OpinionCreate.as_view(), name='opinion_create'),
     path('opinion/create/p/', views.OpinionPersonCreate.as_view(), name='opinion_person_create'),
     path('opinion/add_opinion/', views.add_opinion, name='add_opinion'),
+    path('opinion/add_opinion/p', views.add_person_opinion, name='add_person_opinion'),
     path('opinion/<int:pk>/update/', views.OpinionUpdate.as_view(), name='opinion_update'),
     path('opinion/<int:pk>/delete', views.OpinionDelete.as_view(), name='opinion_delete'),
     path("movies/", views.movie_index, name="movies"),
@@ -19,4 +20,5 @@ urlpatterns = [
     path('personnel/', views.personnel_index, name='personnel'),
     path('personnel/<int:personnel_id>/', views.personnel_detail, name='personnel_detail'),
     path('accounts/signup/', views.signup, name='signup'),
+    path('ajax/load-movies/', views.load_movies, name='load_movies')
 ]

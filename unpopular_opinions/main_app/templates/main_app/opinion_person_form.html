@@ -8,7 +8,7 @@
     <h1>Add Opinion</h1>
   {% endif %}
 
-  <form action="{% url 'add_opinion' %}" method="POST" class="grey darken-4">
+  <form action="{% url 'add_person_opinion' %}" method="POST" class="grey darken-4" id="opinion_person_form">
 
     {% csrf_token %}
     <table class="grey darken-4">
@@ -18,12 +18,37 @@
     <input type="submit" value="Submit" class="btn large grey darken-4">
   </form>
 </div>
+
+<!-- dependent dropdown feature courtesy of Vitor Freitas -->
+<!-- https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html -->
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-    const selectEl1 = document.getElementById('id_person_choice');
-    M.FormSelect.init(selectEl1);
-    const selectEl2 = document.getElementById('id_person_movie');
-    M.FormSelect.init(selectEl2);
-    const selectEl3 = document.getElementById('id_person_role');
-    M.FormSelect.init(selectEl3);
+  $("#id_person").change(function () {
+    let url = '/ajax/load-movies/';  
+    let personId = $(this).val();  
+    $.ajax({                       
+      url: url,                    
+      data: {
+        'person': personId       
+      },
+      success: (data) => {   
+        $("#id_movie").html(data);
+        // reinitialize the field as a dropdown in Materialize:
+        const selectEl2 = document.getElementById('id_movie');
+        M.FormSelect.init(selectEl2);
+      }
+    });
+
+  });
 </script>
+<script>
+  const selectEl1 = document.getElementById('id_person');
+  M.FormSelect.init(selectEl1);
+  const selectEl2 = document.getElementById('id_movie');
+  M.FormSelect.init(selectEl2);
+  const selectEl3 = document.getElementById('id_person_role');
+  M.FormSelect.init(selectEl3);
+</script>
+
 {% endblock %}
