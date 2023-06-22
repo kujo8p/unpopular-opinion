@@ -20,6 +20,8 @@ urlpatterns = [
     path('personnel/', views.personnel_index, name='personnel'),
     path('personnel/create/', views.PersonnelCreate.as_view(), name='personnel_create'),
     path('personnel/<int:personnel_id>/', views.personnel_detail, name='personnel_detail'),
+    path('personnel/<int:personnel_id>/assoc_movie/<int:movie_id>/', views.assoc_movie, name="assoc_movie"),
+    path('personnel/<int:personnel_id>/unassoc_movie/<int:movie_id>/', views.unassoc_movie, name="unassoc_movie"),
     path('accounts/signup/', views.signup, name='signup'),
     path('ajax/load-movies/', views.load_movies, name='load_movies')
 ]

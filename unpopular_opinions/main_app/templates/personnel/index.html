@@ -28,7 +28,10 @@
     <div class="card-content ">
       <span class="card-title">{{ personnel.name }}</span>
       {% if personnel.opinion_set.count %}
-      <p>{{ personnel.opinion_set.count }} Opinions in {{ personnel.movie_set.count }} Movies</p>
+      <p>{{ personnel.opinion_set.count }} Opinions in {{ personnel.movies.count }} Movies</p>
+      {% else %}
+      <p>No Opinions Yet</p>
+      {% endif %}
       {% else %}
       <p>No Opinions</p>
     </div>
@@ -37,6 +40,8 @@
   </div>
 </div>
 </a>
+{% endfor %}
+</a>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.parallax');
@@ -44,4 +49,4 @@
     console.log(elems)
   });
   </script>
-{% endfor %} {% endblock %}
+  {% endblock %}

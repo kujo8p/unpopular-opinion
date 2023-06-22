@@ -3,22 +3,49 @@
 <div class="container">
 <h1> {{ personnel.name }} </h1>
 </div>
-{% for movie in personnel.movie_set.all %}
-  <h3>{{personnel.role}} in {{movie.title}} </h3>
-{% endfor %}
 <div class="container">
 {% if personnel.opinion_set.count %}
-{% for opinion in personnel.opinion_set.all %}
-<a href="{% url 'opinion_detail' opinion.id %}"></a>
-  <div class="card">
-    <div class="card-content grey darken-3">
-      <span class="card-title grey darken-3">{{ opinion.movie }}</span>
-      <p>Opinion: {{ opinion.tldr }}</p>
-    </div>
-  </div>
+  <h4> Movies:
+    </br>
+    {% for movie in personnel.movies.all %}
+    {{ movie.title }}
+    <form action="{% url 'unassoc_movie' personnel.id movie.id %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn">Remove</button>
+    </form>
+    {% endfor %}
+  </h4>
+  {% endif %}
 </div>
-</a>
+{% if personnel.opinion_set.count %}
+{% for opinion in personnel.opinion_set.all %}
+  <div class="container">
+    <a href="{% url 'opinion_detail' opinion.id %}"></a>
+      <div class="card">
+        <div class="card-content grey darken-3">
+          <span class="card-title grey darken-3">{{ opinion.movie }}</span>
+          <p>Opinion: {{ opinion.tldr }}</p>
+        </div>
+      </div>
+    </a>
+  </div>
 {% endfor %}
 {% endif %}
+<div class="container">
+  <h4> Add a Movie to {{ personnel.name }}'s Credits:
+    {% if available_movies.count %}
+      {% for movie in available_movies %}
+        <div class="container">
+          <h4>{{ movie.title }}</h4>
+          <form action="{% url 'assoc_movie' personnel.id movie.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Add</button>
+          </form>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </h4>
+</div>
+
 
 {% endblock %}
