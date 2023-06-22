@@ -27,11 +27,16 @@
   <div class="card grey darken-3">
     <div class="card-content ">
       <span class="card-title">{{ personnel.name }}</span>
+      {% if personnel.opinion_set.count %}
       <p>{{ personnel.opinion_set.count }} Opinions in {{ personnel.movie_set.count }} Movies</p>
+      {% else %}
+      <p>No Opinions</p>
     </div>
+    {% endif %}
   </div>
-</a>
+  </div>
 </div>
+</a>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.parallax');
