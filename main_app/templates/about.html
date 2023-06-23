@@ -1,0 +1,85 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div id="index-banner" class="parallax-container">
+  <div class="section no-pad-bot">
+    <div class="container">
+      <br>
+      <br>
+      <h1 class="header center grey-text text-lighten-5">About Unpopular Opinions</h1>
+      <div class="row center">
+        <h5 class="header col s12 light grey-text text-lighten-5">At Unpopular Opinions, we let users post their unpopular or unconventional opinions about sci-fi movies, and invites the app's community to read and respond to these opinions.</h5>
+      </div>
+      <div class="row center">
+        {% if user.is_authenticated %}
+        <a href="{% url 'movies_create' %}" class="waves-effect waves-light btn-large grey darken-4">Create a Movie</a>
+        {% else %}
+        <a href="{% url 'signup' %}" class="waves-effect waves-light btn-large grey darken-4">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="parallax">
+      <img src="https://i.imgur.com/Wp1rLoh.jpg" alt="blue galaxy" style="transform: translate3d(-50%, 250.215px, 50px); opacity: 1; height: 1000px;">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h2 class="center">
+          <i class="material-icons">search</i>
+        </h2>
+        <h5 class="center">Browse Opinions</h5>
+        
+        <p class="center">Wondering if anyone has had the same crazy thoughts as you? Interested in seeing the broad range of perspectives out there and expanding your mind? Maxed out the conversations about your favorite scifi movies on all the conventional platforms? Come browse our community's opinion pages and find what you're looking for.</p>
+      </div>
+    </div>
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h2 class="center">
+          <i class="material-icons">add_box</i>
+        </h2>
+        <h5 class="center">Add Your Opinion</h5>
+        <p class="center">See something no one else sees? Have a theory and want to gauge the response to it? Know you're right, but can't find the soapbox you need? Sign up to add your conspiracy theories, your diatribes, and your love for the movies that got panned by everyone (it's the next cult classic!) to a forum where people actually go to read them.</p>
+      </div>
+    </div>
+    <div class="col s12 m4">
+      <div class="icon-block">
+        <h2 class="center">
+          <i class="material-icons">comment</i>
+        </h2>
+        <h5 class="center">Join The Discussion</h5>
+        <p class="center">Read an opinion that finally gets it right? Show it some love. Read one so bad that it's not worth the server space it's occupying? Let 'em know! But, you know, nicely (it's the internet, y'all know how to behave). Find yourself opening up to new ways of thinking? Have questions? Whatever it is, opinion authors would appreciate your engagement.</p>
+        
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.parallax');
+    var instances = M.Parallax.init(elems);
+    console.log(elems)
+  });
+  </script>
+
+<!-- <div>
+  <h5 class="header col s12 light grey-text text-lighten-5">You've got a hot take. Picard is annoying. Crystal Skull was the best Indiana Jones. Matt Smith was the worst Doctor. And you want to discuss. Where do you go?
+    <br><br>
+    Reddit? Forget it. Too many things happening there.
+    <br><br>      
+    Facebook? Meh. How many people will take the bait and react?
+    <br><br>
+    YouTube? What a chore. Do you want to scroll through 53 comments every time you want to find an actual conversation?
+    <br><br>
+    Bottom line: Sci-fi hot takes need their own space.
+    <br><br><br>
+    Enter Unpopular Opinions: Scifi Edition
+    <br><br>
+    Unpopular Opinion: Sci-Fi Edition creates a space for people genuinely interested to discuss unconventional perspectives, to have their opinions heard, and for the rabble rousers to find a community that wants to take the bait they're using. It allows users to post their unpopular opinions about sci-fi movies and invites the app's community to read and respond to these opinions.</h5>
+  </div> -->
+  
+  {% endblock %}
