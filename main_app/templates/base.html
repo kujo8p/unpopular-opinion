@@ -31,6 +31,9 @@
       <li><a href="{% url 'personnel' %}" class="grey-text text-lighten-5">Personnel</a></li>
       <li><a href="{% url 'personnel_create' %}" class="grey-text text-lighten-5">Add Cast and Crew</a></li>
     </ul>
+    <ul id="dropdown4" class="dropdown-content grey darken-4">
+      <li><a href="{% url 'logout' %}" class="grey-text text-lighten-5">Sign Out</a></li>
+    </ul>
     <nav class="grey darken-4">
       <div class="nav-wrapper container grey darken-4">
         <ul>
@@ -45,7 +48,7 @@
           <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown1">Opinions<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown2">Movies<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown3">Personnel<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li><a href="{% url 'logout' %}">Log Out</a></li>
+          <li><a class="dropdown-trigger grey darken-4" href="#!" data-target="dropdown4">{{ user }}<i class="material-icons right">arrow_drop_down</i></a></li>
         {% else %}
           <li><a href="{% url 'login' %}">Log In</a></li>
           <li><a href="{% url 'signup' %}">Sign Up</a></li>

@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="container">
+  <div class="container grey darken-4"></div>
+    <div class="card grey darken-3"  style="width: 500px; margin: 20px auto;">
+      <div class="card-content grey darken-3 center">
+        <i class="material-icons">error</i><br><p class="card-title grey darken-3" style="font-size: 15px;">Before you create an opinion about a person, please make sure (1) the person is in our <a style="color: rgb(0, 167, 205)" href="{% url 'personnel' %}">cast and crew database</a>, (2) the movie is in our <a style="color: rgb(0, 167, 205)" href="{% url 'movies' %}">movie database</a>, and (3) the movie has been added to the person's credits. If not, you can add movies <a style="color: rgb(0, 167, 205)" href="{% url 'movies_create' %}">here</a>, cast and crew <a style="color: rgb(0, 167, 205)" href="{% url 'personnel_create' %}">here</a>, and add credits from the person's specific <a style="color: rgb(0, 167, 205)" href="{% url 'personnel' %}">page</a>. Thank you!</p>
+    </div>
+  </div>
+
+
   {% if object %}
     <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
   {% else %}

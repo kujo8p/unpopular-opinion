@@ -125,6 +125,10 @@ def add_comment(request, opinion_id):
         new_comment.save()
     return redirect('opinion_detail', opinion_id=opinion_id)
 
+class CommentDelete(LoginRequiredMixin, DeleteView):
+    model = Comment
+    success_url = '/opinion'
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -135,8 +139,8 @@ def signup(request):
         # This will add the user to the database
             user = form.save()
         # This is how we log a user in via code
-        login(request, user)
-        return redirect('index')
+            login(request, user)
+        return redirect('home')
     else:
         error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form

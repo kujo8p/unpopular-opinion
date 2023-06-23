@@ -1,4 +1,8 @@
-# Created by https://www.gitignore.io
+.env
+node_modules
+.venv
+
+
 
 ### OSX ###
 .DS_Store
@@ -87,3 +91,6 @@ local_settings.py
 
 .env
 db.sqlite3
+node_modules
+.venv
+
