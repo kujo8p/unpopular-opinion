@@ -43,10 +43,12 @@
           <!-- <p>Edited: {{ opinion.recent_edit }}</p> -->
           <!-- {% endif %} -->
           {% if user.is_authenticated %}
+          {% if user == opinion.user %}
           <div class="card-action">
             <a href="{% url 'opinion_update' opinion.id %}">Update</a>
             <a href="{% url 'opinion_delete' opinion.id %}">Delete</a>
           </div>
+          {% endif %}
           {% endif %}
       </div>
     </div>
@@ -79,13 +81,15 @@
     <div class="card grey darken-3">
       <div class="card-content grey darken-3">
         {% if user.is_authenticated %}
+        {% if user == comment.user %}
         <div class="card-action right">
           <a href="{% url 'comment_delete' comment.id %}"><i class="material-icons">delete</i></a>
         </div>
+        {% endif %}
+        {% endif %}
         <p>{{comment.user}} says:</p>
         <br>
         <p>{{comment.content}}</p>
-        {% endif %}
       </div>
     </div>
 
