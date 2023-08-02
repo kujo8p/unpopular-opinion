@@ -78,9 +78,14 @@
 
     <div class="card grey darken-3">
       <div class="card-content grey darken-3">
+        {% if user.is_authenticated %}
+        <div class="card-action right">
+          <a href="{% url 'comment_delete' comment.id %}"><i class="material-icons">delete</i></a>
+        </div>
         <p>{{comment.user}} says:</p>
         <br>
         <p>{{comment.content}}</p>
+        {% endif %}
       </div>
     </div>
 

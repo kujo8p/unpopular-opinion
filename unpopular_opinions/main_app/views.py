@@ -100,6 +100,10 @@ class PersonnelCreate(LoginRequiredMixin, CreateView):
     fields = ["name"]
     success_url = '/personnel'
 
+class CommentDelete(LoginRequiredMixin, DeleteView):
+    model = Comment
+    success_url = '/opinion'
+
 def add_opinion(request):
     form = OpinionForm(request.POST)
     if form.is_valid():
@@ -136,7 +140,7 @@ def signup(request):
             user = form.save()
         # This is how we log a user in via code
         login(request, user)
-        return redirect('index')
+        return redirect('home')
     else:
         error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form
