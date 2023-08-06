@@ -14,11 +14,71 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
-  <header class="navbar-fixed grey darken-4">
+  <header>
     
-    
+    <!-- Slide out nav for mobile use-->
+    <ul id="slide-out" class="sidenav">
+      <div class="row">
+        <div>
+          {% if user.is_authenticated %}
+        <ul>
+          <br>
+          <h5 class="user"> <b>{{ user }}</b></h5>
+          <li><a href="{% url 'logout' %}"><b>Log Out</b></a></li>
+        </ul>
+        {% else %}
+        <ul>
+        <li><a href="{% url 'login' %}"><b>Log In</b></a></li>
+        <li><a href="{% url 'signup' %}"><b>Sign Up</b></a></li>
+      </ul>
+      {% endif %}
+      </div>
+    </div>
+    <li><div class="divider"></div></li>
+      <li>
+        <a href="{% url 'home' %}"><b>Home</b></a>
+      </li>
 
+      <li>
+        <a href="{% url 'about' %}"><b>About</b></a>
+      </li>
 
+      <li class="padding">
+        <ul class="collapsible">
+          <li>
+            <a class="collapsible-header" tabindex="0"><b>Opinions</b></a>
+            <div class="collapsible-body">
+          <ul>
+            <li><a href="{% url 'opinion' %}">Opinions</a></li>
+            <li><a href="{% url 'opinion_type' %}">Add an Opinion</a></li>
+          </ul>
+        </div>
+        </li>
+          <li>
+            <a class="collapsible-header" tabindex="0"><b>Movies</b></a>
+            <div class="collapsible-body">
+          <ul>
+            <li><a href="{% url 'movies' %}">Movies</a></li>
+            <li><a href="{% url 'movies_create' %}">Add an Movie</a></li>
+          </ul>
+        </div>
+        </li>
+          <li>
+            <a class="collapsible-header" tabindex="0"><b>Personnel</b></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="{% url 'personnel' %}">Personnel Library</a></li>
+                <li><a href="{% url 'personnel_create' %}">Add Cast and Crew</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+
+    </ul>
+    <a href="#" data-target="slide-out" class="top-nav sidenav-trigger full hide-on-large-only"><i class="medium material-icons">menu</i></a>
+
+    <div>
     <ul id="dropdown1" class="dropdown-content grey darken-4">
       <li><a href="{% url 'opinion' %}" class="grey-text text-lighten-5">Opinions</a></li>
       <li><a href="{% url 'opinion_type' %}" class="grey-text text-lighten-5">Add an Opinion</a></li>
@@ -39,7 +99,7 @@
         <ul>
           <li>
             <a
-              href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Unpopular Opinions</a>
+              href="{% url 'home' %}" class="left brand-logo hide-on-med-and-down">&nbsp;&nbsp;Unpopular Opinions</a>
           </li>
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -55,12 +115,6 @@
         {% endif %}
         </ul>
       </div>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.dropdown-trigger');
-    var instances = M.Dropdown.init(elems);
-  });
-      </script>
     </nav>
 
 
@@ -68,6 +122,20 @@
 
 
   </header>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  });
+        document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems);
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+      </script>
   <main>
     {% block content %} 
     {% endblock %}
