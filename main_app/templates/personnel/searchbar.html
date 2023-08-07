@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Search Results</h2>
+</div>
+
+<div class="container">
+</div>
+{% for person in personnel %}
+<div class="container">
+<a href="{% url 'personnel_detail' person.id %}">
+    <div class="card grey darken-3">
+      <div class="card-content grey darken-3">
+        <span class="card-title grey darken-3">{{ person.name }}</span>
+        <p>Release Year: {{ person.movies.count }}</p>
+      </div>
+    </div>
+  </a>
+</div>
+</div>
+{% endfor %}
+
+{% endblock %}

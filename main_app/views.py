@@ -91,6 +91,28 @@ def movie_detail(request, movie_id):
         'movie': movie
     })
 
+def MovieSearchBar(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            movies = Movie.objects.filter(title__icontains=query)
+            return render(request, 'movies/searchbar.html', {'movies': movies})
+        else:
+            print("No Movie Found")
+            return render(request, 'movies/searchbar.html', {})
+
+
+def PersonnelSearchBar(request):
+    if request.method == 'GET':
+        personnelQuery = request.GET.get('personnelQuery')
+        if personnelQuery:
+            personnel = Personnel.objects.filter(name__icontains=personnelQuery)
+            return render(request, 'personnel/searchbar.html', {'personnel': personnel})
+        else:
+            print("Personnel Not Found")
+            return render(request, 'personnel/searchbar.html', {})
+
+
 class MovieCreate(LoginRequiredMixin, CreateView):
     model = Movie
     fields = ["title", "release_year"]
