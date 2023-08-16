@@ -51,7 +51,7 @@ class Opinion(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     content = models.CharField('explanation', max_length=10000)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    person = models.ForeignKey(Personnel, on_delete=models.CASCADE, db_column='cast or crew member', null=True)
+    person = models.ForeignKey(Personnel, on_delete=models.CASCADE, null=True)
     person_role = models.CharField('role', choices=ROLES, default=ROLES[0], null=True)
     person_movie = models.CharField('movie', max_length=150, null=True)
     

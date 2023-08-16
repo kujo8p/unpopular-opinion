@@ -24,5 +24,7 @@ urlpatterns = [
     path('personnel/<int:personnel_id>/assoc_movie/<int:movie_id>/', views.assoc_movie, name="assoc_movie"),
     path('personnel/<int:personnel_id>/unassoc_movie/<int:movie_id>/', views.unassoc_movie, name="unassoc_movie"),
     path('accounts/signup/', views.signup, name='signup'),
+    path('movies/search/', views.MovieSearchBar, name='movie_search'),
+    path('personnel/search/', views.PersonnelSearchBar, name='personnel_search'),
     path('ajax/load-movies/', views.load_movies, name='load_movies')
 ]

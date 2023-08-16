@@ -15,7 +15,7 @@ import environ
 from django.core.management.utils import get_random_secret_key
 
 env = environ.Env(
-    DEBUG=(bool, False),
+    DEBUG=(bool, True),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'unpopular_opinions.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db()
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'unpopular-opinions',
-    # }
+    # 'default': env.db()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'unpopular-opinions',
+    }
 }
 
 

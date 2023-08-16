@@ -14,6 +14,20 @@ main {
   flex: 1 0 auto;
 }
 
+.sidenav {
+  background-color: #212121;
+  color: #fafafa;
+}
+
+.padding {
+  padding-left: 15px;
+}
+
+.user {
+  padding-left: 30px;
+}
+
+
 footer.page-footer {
   padding-top: 0;
   text-align: right;

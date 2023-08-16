@@ -19,7 +19,14 @@
 </div>
 
 <br>
-
+<div class="container">
+  <form action="{% url 'personnel_search' %}" method="get">
+    {% csrf_token %}
+    <input type="text" name="personnelQuery" placeholder="Search" aria-label="search">
+    <button class="btn-large grey darken-4" type="submit">Search</button>
+  </form>
+  </div>
+  <br>
 {% for personnel in personnel %}
 <a href="{% url 'personnel_detail' personnel.id %}">
 
