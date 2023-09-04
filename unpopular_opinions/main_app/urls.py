@@ -21,7 +21,7 @@ urlpatterns = [
     path(
         "opinion/<int:pk>/delete", views.OpinionDelete.as_view(), name="opinion_delete"
     ),
-    path("movies/", views.movie_index, name="movies"),
+    path("movies/", views.index, name="movies"),
     path("movies/<int:movie_id>/", views.movie_detail, name="movie_detail"),
     path("movies/create/", views.MovieCreate.as_view(), name="movies_create"),
     path(
@@ -44,4 +44,7 @@ urlpatterns = [
     ),
     path("accounts/signup/", views.signup, name="signup"),
     path("ajax/load-movies/", views.load_movies, name="load_movies"),
+    # API
+    path("", views.index, name="index"),
+    path("search/", views.search, name="search"),
 ]

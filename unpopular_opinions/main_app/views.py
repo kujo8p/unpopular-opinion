@@ -7,27 +7,13 @@ from .models import Opinion, Movie, Comment, User, Personnel
 from .forms import CommentForm, OpinionForm, OpinionFormPerson
 from django.contrib.auth import login
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from rest_framework.response import response
-from rest_framework.decorators import api_view
-from unpopular_opinions.models import Movie
-from .serializers import MovieSerializer
 
-# name possibly subject to change
+
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-# The example uses Item/Items instead. If debugging issues arise.
-# Trying multiple methods to connect API, keeping this one until I don't need it.
-@api_view(["GET"])
-def getData(request):
-    movies = Movie.onjects.all()
-    serializer = MovieSerializer(movies, many=True)
-    return Response(serializer.data)
-
-
-# Create your views here.
 def home(request):
     return render(request, "home.html")
 
@@ -36,7 +22,6 @@ def about(request):
     return render(request, "about.html")
 
 
-# Function names may change when I know what has been happening on the  Front-end.
 def opinions_index(request):
     opinions = Opinion.objects.all()
     return render(request, "opinions/index.html", {"opinions": opinions})
@@ -177,3 +162,22 @@ def signup(request):
     form = UserCreationForm()
     context = {"form": form, "error_message": error_message}
     return render(request, "registration/signup.html", context)
+
+
+# API
+def index(request):
+    response = requests.get(
+        "https://api.themoviedb.org/3/movie/popular?include_adult=false&language=en-US&api_key=b4bedc42aa9ae7658b55aa4e29e50baf"
+    )
+    movies = response.json().get("results")
+    print(movies)
+    return render(request, "movies/index.html", {"movies": movies})
+
+
+def search(request):
+    searchMovie = request.GET.get("movie")
+    response = requests.get(
+        f"https://api.themoviedb.org/3/search/movie?api_key=b4bedc42aa9ae7658b55aa4e29e50bafquery={searchMovie}"
+    )
+    movies = response.json().get("results")
+    return render(request, "movies.html", {"movies": movies})
